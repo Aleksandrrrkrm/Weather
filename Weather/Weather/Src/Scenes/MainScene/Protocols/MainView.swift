@@ -9,4 +9,5 @@ import UIKit
 
 protocol MainView: AnyObject {
     
+    func setupTextLabel(_ text: String)
 }

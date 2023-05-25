@@ -13,6 +13,9 @@ class ForecastViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ForecastConfigurator.configure(view: self)
+        view.backgroundColor = .blue
     }
 }
 

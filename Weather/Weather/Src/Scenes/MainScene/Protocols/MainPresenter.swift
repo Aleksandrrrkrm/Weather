@@ -9,4 +9,6 @@ import Foundation
 
 protocol MainPresenter {
     
+    func getWeather(lat: String, lon: String)
+    func getGeo(query: String)
 }
