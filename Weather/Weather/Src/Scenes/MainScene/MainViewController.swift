@@ -14,36 +14,33 @@ class MainViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
-    var label = UILabel()
+    var searchButton = UIButton()
+    
+    var cityLabel = UILabel()
+        .alignment(.center)
+        .setManyLines()
+        .color(UIColor.white)
+        .font(UIFont(name: "Montserrat-Bold", size: 30) ?? UIFont())
+    
+    var tempLabel = UILabel()
+        .color(UIColor.white)
+        .font(UIFont(name: "Montserrat-SemiBold", size: 40) ?? UIFont())
        
+    var descriptionLabel = UILabel()
+        .color(UIColor.white)
+        .font(UIFont(name: "Montserrat-Medium", size: 20) ?? UIFont())
+    
+    var imageView = UIImageView()
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         MainConfigurator.configure(view: self)
         locationManager.delegate = self
-        view.backgroundColor = .red
+        view.backgroundColor = .blue
         checkLocationPermision()
-        setupTestLabel()
-    }
-    
-    // MARK: - UIView
-    
-    private func setupAllView() {
-        
-    }
-    
-    private func setupTestLabel() {
-        label.text = "ответов нет"
-        label.font = UIFont(name: "arial", size: 20)
-        label.textColor = .white
-        print(label.text)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        setupAllView()
     }
     
     // MARK: - USAGE
@@ -52,22 +49,45 @@ class MainViewController: UIViewController {
         if status == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         } else if status == .authorizedWhenInUse || status == .authorizedAlways {
-            setupTextLabel("разрешение есть")
-            print(label.text)
+            setupCityLabel("разрешение есть")
+            print(cityLabel.text)
             locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.startUpdatingLocation()
         } else {
-            setupTextLabel("разрешения нет")
-            print(label.text)
+            setupCityLabel("разрешения нет")
+            print(cityLabel.text)
         }
     }
     
-    
+    @objc func buttonTapped() {
+        // Обработка нажатия кнопки
+        print("Кнопка была нажата")
+    }
 }
 
 extension MainViewController: MainView {
     
-    func setupTextLabel(_ text: String) {
-        label.text = text
+    func setupCityLabel(_ text: String) {
+        DispatchQueue.main.async {
+            self.cityLabel.text = text
+        }
+    }
+    
+    func setupTempLabel(_ temp: Int) {
+        DispatchQueue.main.async {
+            self.tempLabel.text = "\(temp) °C"
+        }
+    }
+    
+    func setupDescriptionLabel(_ text: String) {
+        DispatchQueue.main.async {
+            self.descriptionLabel.text = text
+        }
+    }
+    
+    func setupImage(_ named: String) {
+        DispatchQueue.main.async {
+            self.imageView.image = UIImage(named: named)
+        }
     }
 }

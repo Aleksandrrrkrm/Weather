@@ -9,5 +9,8 @@ import UIKit
 
 protocol MainView: AnyObject {
     
-    func setupTextLabel(_ text: String)
+    func setupCityLabel(_ text: String)
+    func setupTempLabel(_ temp: Int)
+    func setupDescriptionLabel(_ text: String)
+    func setupImage(_ named: String)
 }

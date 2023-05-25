@@ -29,8 +29,6 @@ struct RequestSettings {
                 request.setValue("Token b0b15ae1e9349d2aeafcb28a3d491e1501a20408", forHTTPHeaderField: "Authorization")
                 let parameters = [
                     "query": query,
-                    "from_bound": ["value": "city"],
-                    "to_bound": ["value": "city"],
                     "count": 3
                 ] as [String : Any]
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {

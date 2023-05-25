@@ -25,6 +25,19 @@
 		C23F7EBD2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EBC2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift */; };
 		C23F7EC02A1F770B00BFAE00 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EBF2A1F770B00BFAE00 /* CityModel.swift */; };
 		C23F7EC22A1F773B00BFAE00 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EC12A1F773B00BFAE00 /* WeatherModel.swift */; };
+		C23F7EC72A1FA0B900BFAE00 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C23F7EC42A1FA0B900BFAE00 /* Montserrat-Medium.ttf */; };
+		C23F7EC82A1FA0B900BFAE00 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C23F7EC52A1FA0B900BFAE00 /* Montserrat-SemiBold.ttf */; };
+		C23F7EC92A1FA0B900BFAE00 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C23F7EC62A1FA0B900BFAE00 /* Montserrat-Bold.ttf */; };
+		C23F7ECB2A1FA6FC00BFAE00 /* MainVC+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ECA2A1FA6FC00BFAE00 /* MainVC+Views.swift */; };
+		C23F7ECE2A1FA88100BFAE00 /* ExtLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ECD2A1FA88100BFAE00 /* ExtLabel.swift */; };
+		C23F7ED02A1FA8D700BFAE00 /* ExtButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ECF2A1FA8D700BFAE00 /* ExtButton.swift */; };
+		C23F7ED52A1FBC0D00BFAE00 /* ExtImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ED42A1FBC0D00BFAE00 /* ExtImageView.swift */; };
+		C23F7EDE2A1FDBEE00BFAE00 /* SearchCityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ED82A1FDBEE00BFAE00 /* SearchCityRouter.swift */; };
+		C23F7EDF2A1FDBEE00BFAE00 /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ED92A1FDBEE00BFAE00 /* SearchCityViewController.swift */; };
+		C23F7EE02A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EDA2A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift */; };
+		C23F7EE12A1FDBEE00BFAE00 /* SearchCityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EDB2A1FDBEE00BFAE00 /* SearchCityConfigurator.swift */; };
+		C23F7EE62A1FDBFE00BFAE00 /* SearchCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EE42A1FDBFE00BFAE00 /* SearchCityView.swift */; };
+		C23F7EE72A1FDBFE00BFAE00 /* SearchCityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EE52A1FDBFE00BFAE00 /* SearchCityPresenter.swift */; };
 		C2D424C32A1E6C01009D3E0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D424C22A1E6C01009D3E0F /* AppDelegate.swift */; };
 		C2D424C52A1E6C01009D3E0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D424C42A1E6C01009D3E0F /* SceneDelegate.swift */; };
 		C2D424CD2A1E6C01009D3E0F /* Weather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C2D424CB2A1E6C01009D3E0F /* Weather.xcdatamodeld */; };
@@ -52,6 +65,19 @@
 		C23F7EBC2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		C23F7EBF2A1F770B00BFAE00 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		C23F7EC12A1F773B00BFAE00 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		C23F7EC42A1FA0B900BFAE00 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		C23F7EC52A1FA0B900BFAE00 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		C23F7EC62A1FA0B900BFAE00 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		C23F7ECA2A1FA6FC00BFAE00 /* MainVC+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+Views.swift"; sourceTree = "<group>"; };
+		C23F7ECD2A1FA88100BFAE00 /* ExtLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtLabel.swift; sourceTree = "<group>"; };
+		C23F7ECF2A1FA8D700BFAE00 /* ExtButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtButton.swift; sourceTree = "<group>"; };
+		C23F7ED42A1FBC0D00BFAE00 /* ExtImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtImageView.swift; sourceTree = "<group>"; };
+		C23F7ED82A1FDBEE00BFAE00 /* SearchCityRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityRouter.swift; sourceTree = "<group>"; };
+		C23F7ED92A1FDBEE00BFAE00 /* SearchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
+		C23F7EDA2A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityPresenterImp.swift; sourceTree = "<group>"; };
+		C23F7EDB2A1FDBEE00BFAE00 /* SearchCityConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityConfigurator.swift; sourceTree = "<group>"; };
+		C23F7EE42A1FDBFE00BFAE00 /* SearchCityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCityView.swift; sourceTree = "<group>"; };
+		C23F7EE52A1FDBFE00BFAE00 /* SearchCityPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCityPresenter.swift; sourceTree = "<group>"; };
 		C2D424BF2A1E6C01009D3E0F /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2D424C22A1E6C01009D3E0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2D424C42A1E6C01009D3E0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +120,7 @@
 		C23F7EB32A1F3DC600BFAE00 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C23F7EBE2A1F76F700BFAE00 /* Models */,
 				C23F7EB42A1F3EB400BFAE00 /* Network Service */,
 			);
 			path = Services;
@@ -113,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				C23F7EBC2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift */,
+				C23F7ECA2A1FA6FC00BFAE00 /* MainVC+Views.swift */,
 			);
 			path = VCExtensions;
 			sourceTree = "<group>";
@@ -124,6 +152,47 @@
 				C23F7EC12A1F773B00BFAE00 /* WeatherModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C23F7EC32A1FA04500BFAE00 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C23F7EC62A1FA0B900BFAE00 /* Montserrat-Bold.ttf */,
+				C23F7EC42A1FA0B900BFAE00 /* Montserrat-Medium.ttf */,
+				C23F7EC52A1FA0B900BFAE00 /* Montserrat-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C23F7ECC2A1FA84100BFAE00 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C23F7ECD2A1FA88100BFAE00 /* ExtLabel.swift */,
+				C23F7ECF2A1FA8D700BFAE00 /* ExtButton.swift */,
+				C23F7ED42A1FBC0D00BFAE00 /* ExtImageView.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C23F7ED62A1FDBD200BFAE00 /* SearchCityScene */ = {
+			isa = PBXGroup;
+			children = (
+				C23F7EE32A1FDBF500BFAE00 /* Protocols */,
+				C23F7ED82A1FDBEE00BFAE00 /* SearchCityRouter.swift */,
+				C23F7ED92A1FDBEE00BFAE00 /* SearchCityViewController.swift */,
+				C23F7EDA2A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift */,
+				C23F7EDB2A1FDBEE00BFAE00 /* SearchCityConfigurator.swift */,
+			);
+			path = SearchCityScene;
+			sourceTree = "<group>";
+		};
+		C23F7EE32A1FDBF500BFAE00 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C23F7EE52A1FDBFE00BFAE00 /* SearchCityPresenter.swift */,
+				C23F7EE42A1FDBFE00BFAE00 /* SearchCityView.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		C2D424B62A1E6C01009D3E0F = {
@@ -156,6 +225,7 @@
 				C2D424DE2A1E6FA9009D3E0F /* Scenes */,
 				C23F7EB32A1F3DC600BFAE00 /* Services */,
 				C2D424DB2A1E6F68009D3E0F /* Resources */,
+				C23F7ECC2A1FA84100BFAE00 /* Utils */,
 				C2D424DD2A1E6F9B009D3E0F /* Cashe */,
 				C2D424DA2A1E6F5B009D3E0F /* AppDelegate */,
 				C2D424DC2A1E6F8B009D3E0F /* Info */,
@@ -175,6 +245,7 @@
 		C2D424DB2A1E6F68009D3E0F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C23F7EC32A1FA04500BFAE00 /* Fonts */,
 				C2D424CE2A1E6C02009D3E0F /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -202,6 +273,7 @@
 				C2D424DF2A1E6FB2009D3E0F /* LaunchScreen */,
 				C2D424E22A1E7019009D3E0F /* RootTabBarController */,
 				C2D424E02A1E6FC4009D3E0F /* MainScene */,
+				C23F7ED62A1FDBD200BFAE00 /* SearchCityScene */,
 				C2D424E12A1E6FF8009D3E0F /* ForecastScene */,
 			);
 			path = Scenes;
@@ -218,7 +290,6 @@
 		C2D424E02A1E6FC4009D3E0F /* MainScene */ = {
 			isa = PBXGroup;
 			children = (
-				C23F7EBE2A1F76F700BFAE00 /* Models */,
 				C23F7EBB2A1F515400BFAE00 /* VCExtensions */,
 				C2239C862A1E7185008C3936 /* Protocols */,
 				C2239C6F2A1E7167008C3936 /* MainRouter.swift */,
@@ -307,7 +378,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C23F7EC92A1FA0B900BFAE00 /* Montserrat-Bold.ttf in Resources */,
 				C2D424D22A1E6C02009D3E0F /* LaunchScreen.storyboard in Resources */,
+				C23F7EC72A1FA0B900BFAE00 /* Montserrat-Medium.ttf in Resources */,
+				C23F7EC82A1FA0B900BFAE00 /* Montserrat-SemiBold.ttf in Resources */,
 				C2D424CF2A1E6C02009D3E0F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C23F7EB62A1F3EC400BFAE00 /* RequestManager.swift in Sources */,
+				C23F7EDE2A1FDBEE00BFAE00 /* SearchCityRouter.swift in Sources */,
 				C2239C752A1E7167008C3936 /* MainRouter.swift in Sources */,
 				C2239C782A1E7167008C3936 /* MainConfigurator.swift in Sources */,
 				C2D424CD2A1E6C01009D3E0F /* Weather.xcdatamodeld in Sources */,
@@ -329,13 +404,22 @@
 				C2239C8B2A1E71A6008C3936 /* ForecastPresenter.swift in Sources */,
 				C2239C762A1E7167008C3936 /* MainViewController.swift in Sources */,
 				C2D424C32A1E6C01009D3E0F /* AppDelegate.swift in Sources */,
+				C23F7ED02A1FA8D700BFAE00 /* ExtButton.swift in Sources */,
+				C23F7EE02A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift in Sources */,
+				C23F7ECE2A1FA88100BFAE00 /* ExtLabel.swift in Sources */,
+				C23F7EE72A1FDBFE00BFAE00 /* SearchCityPresenter.swift in Sources */,
 				C23F7EC22A1F773B00BFAE00 /* WeatherModel.swift in Sources */,
+				C23F7ED52A1FBC0D00BFAE00 /* ExtImageView.swift in Sources */,
 				C2239C902A1E71B8008C3936 /* MainView.swift in Sources */,
+				C23F7ECB2A1FA6FC00BFAE00 /* MainVC+Views.swift in Sources */,
 				C23F7EB82A1F3ED400BFAE00 /* ApiClient.swift in Sources */,
 				C2239C822A1E717A008C3936 /* ForecastViewController.swift in Sources */,
 				C23F7EBA2A1F3EE000BFAE00 /* RequestSettings.swift in Sources */,
 				C2239C8F2A1E71B8008C3936 /* MainPresenter.swift in Sources */,
 				C2239C812A1E717A008C3936 /* ForecastRouter.swift in Sources */,
+				C23F7EDF2A1FDBEE00BFAE00 /* SearchCityViewController.swift in Sources */,
+				C23F7EE62A1FDBFE00BFAE00 /* SearchCityView.swift in Sources */,
+				C23F7EE12A1FDBEE00BFAE00 /* SearchCityConfigurator.swift in Sources */,
 				C23F7EBD2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift in Sources */,
 				C2239C8C2A1E71A6008C3936 /* ForecastView.swift in Sources */,
 				C2239C832A1E717A008C3936 /* ForecastPresenterImp.swift in Sources */,

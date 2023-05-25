@@ -15,9 +15,8 @@ extension MainViewController: CLLocationManagerDelegate {
         }
         print("Latitude: \(location.coordinate.latitude), Longitude: \(location.coordinate.longitude)")
         locationManager.stopUpdatingLocation()
-        setupTextLabel("локация есть - \(location.coordinate.latitude)")
-        print(label.text)
-        presenter?.getWeather(lat: "47.2313", lon: "39.7233")
+//        presenter?.getWeather(lat: "47.2313", lon: "39.7233")
+        presenter?.getWeather(lat: "\(location.coordinate.latitude)", lon: "\(location.coordinate.longitude)")
         presenter?.getGeo(query: "")
     }
     

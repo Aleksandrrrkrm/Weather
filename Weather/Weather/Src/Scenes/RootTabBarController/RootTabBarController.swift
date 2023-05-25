@@ -21,13 +21,13 @@ final class RootTabBarController: UITabBarController {
             configureTabBar()
         }
         
-        private func configureTabBar() {
-            tabBar.barTintColor = .gray
-            tabBar.backgroundColor = .lightGray
-            tabBar.isTranslucent = false
-            tabBar.tintColor = .white
-            tabBar.unselectedItemTintColor = .black
-        }
+    private func configureTabBar() {
+        tabBar.barTintColor = .gray
+        tabBar.backgroundColor = .white
+        tabBar.isTranslucent = false
+        tabBar.tintColor = .black
+        tabBar.unselectedItemTintColor = .gray
+    }
         
         private func addViewControllers() {
             viewControllers = [mainViewController, forecastViewController]
