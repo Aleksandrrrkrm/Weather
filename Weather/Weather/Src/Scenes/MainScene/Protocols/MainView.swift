@@ -13,4 +13,6 @@ protocol MainView: AnyObject {
     func setupTempLabel(_ temp: Int)
     func setupDescriptionLabel(_ text: String)
     func setupImage(_ named: String)
+    func showLoading()
+    func hideLoading()
 }

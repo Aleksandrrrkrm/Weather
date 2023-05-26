@@ -14,7 +14,7 @@ enum ForecastConfigurator {
         let presenter = ForecastPresenterImp(view, router)
         view.presenter = presenter
     }
-
+    
     static func open(navigationController: UINavigationController) {
         let view = ForecastViewController()
         Self.configure(view: view)

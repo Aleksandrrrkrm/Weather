@@ -11,10 +11,21 @@ extension MainViewController {
     
     func setupAllView() {
         setupImageView()
+        setupActivity()
         setupCityLabel()
         setupTempLabel()
         setupDescriptionLabel()
         setupSearchButton()
+    }
+    
+    private func setupActivity() {
+        view.addSubview(activityIndicator)
+        activityIndicator.color = .white
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 10),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
     }
     
     private func setupCityLabel() {
@@ -40,10 +51,12 @@ extension MainViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         imageView.contentMode = .scaleToFill
+        imageView.image = UIImage(named: "base")
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            imageView.heightAnchor.constraint(equalTo: view.heightAnchor)
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             
         ])
     }
@@ -58,10 +71,11 @@ extension MainViewController {
     }
     
     private func setupSearchButton() {
-        let rightButton = UIBarButtonItem(title: "Другой город", style: .plain, target: self, action: #selector(buttonTapped))
-        rightButton.tintColor = .gray
-               
-               // Установка кнопки в правой части навигационного бара
-               navigationItem.rightBarButtonItem = rightButton
+        let rightButton = UIBarButtonItem(title: "Сменить город",
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(buttonTapped))
+        rightButton.tintColor = .white
+        navigationItem.rightBarButtonItem = rightButton
     }
 }

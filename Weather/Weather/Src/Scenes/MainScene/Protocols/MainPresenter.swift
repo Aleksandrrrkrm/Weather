@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol MainPresenter {
     
     func getWeather(lat: String, lon: String)
-    func getGeo(query: String)
+    func reverseGeocode(location: CLLocation)
+    func openSearchScene()
 }

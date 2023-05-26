@@ -14,7 +14,7 @@ enum MainConfigurator {
         let presenter = MainPresenterImp(view, router)
         view.presenter = presenter
     }
-
+    
     static func open(navigationController: UINavigationController) {
         let view = MainViewController()
         Self.configure(view: view)

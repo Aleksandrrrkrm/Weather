@@ -9,4 +9,6 @@ import Foundation
 
 protocol ForecastPresenter {
     
+    func setData(data: [Forecast])
+    func getData() -> [Forecast]
 }

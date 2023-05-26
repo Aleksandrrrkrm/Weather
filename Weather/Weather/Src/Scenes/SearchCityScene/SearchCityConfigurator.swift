@@ -3,9 +3,6 @@
 //  Weather
 //
 //  Created by Александр Головин on 25.05.2023.
-//  Copyright (c) 2023 ___ORGANIZATIONNAME___. All rights reserved.
-//
-//  Cheeezcake Template Inc.
 //
 
 import UIKit
@@ -17,7 +14,7 @@ enum SearchCityConfigurator {
         let presenter = SearchCityPresenterImp(view, router)
         view.presenter = presenter
     }
-
+    
     static func open(navigationController: UINavigationController) {
         let view = SearchCityViewController()
         Self.configure(view: view)

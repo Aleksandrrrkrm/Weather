@@ -13,13 +13,10 @@ extension MainViewController: CLLocationManagerDelegate {
         guard let location = locations.first else {
             return
         }
-        print("Latitude: \(location.coordinate.latitude), Longitude: \(location.coordinate.longitude)")
         locationManager.stopUpdatingLocation()
-//        presenter?.getWeather(lat: "47.2313", lon: "39.7233")
         presenter?.getWeather(lat: "\(location.coordinate.latitude)", lon: "\(location.coordinate.longitude)")
-        presenter?.getGeo(query: "")
+        presenter?.reverseGeocode(location: location)
     }
-    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location error: \(error)")

@@ -15,9 +15,10 @@ class MainRouter {
         self.view = view
     }
     
-    func openSomeScene() {
+    func openSearchScene() {
         guard let navController = self.view?.navigationController else {
             return
         }
+        SearchCityConfigurator.open(navigationController: navController)
     }
 }

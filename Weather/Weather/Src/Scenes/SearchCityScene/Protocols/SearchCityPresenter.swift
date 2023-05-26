@@ -12,4 +12,7 @@ import Foundation
 
 protocol SearchCityPresenter {
     
+    func getGeo(query: String)
+    func getCount() -> Int
+    func getData() -> [AddressSuggestion]
 }

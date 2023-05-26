@@ -32,7 +32,7 @@ final class ApiClientImp {
                 complition(.failure("Invalid response from POST request"))
                 return
             }
-                complition(.success(data))
+            complition(.success(data))
         }
         task.resume()
     }

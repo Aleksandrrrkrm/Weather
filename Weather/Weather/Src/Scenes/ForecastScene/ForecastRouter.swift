@@ -15,9 +15,9 @@ class ForecastRouter {
         self.view = view
     }
     
-    func openSomeScene() {
-        guard let navController = self.view?.navigationController else {
-            return
-        }
-    }
+    //    func openSomeScene() {
+    //        guard let navController = self.view?.navigationController else {
+    //            return
+    //        }
+    //    }
 }

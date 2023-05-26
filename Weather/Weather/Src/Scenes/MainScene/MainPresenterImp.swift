@@ -6,11 +6,28 @@
 //
 
 import Foundation
+import CoreLocation
+import CoreData
 
 class MainPresenterImp: MainPresenter {
     
     private weak var view: MainView?
     private let router: MainRouter
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Weather")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    lazy var context: NSManagedObjectContext = {
+        return persistentContainer.viewContext
+    }()
+    
     
     init(_ view: MainView,
          _ router: MainRouter) {
@@ -19,6 +36,9 @@ class MainPresenterImp: MainPresenter {
     }
     
     func getWeather(lat: String, lon: String) {
+        let fetchRequest: NSFetchRequest<Weather> = Weather.fetchRequest()
+        let objects = try? context.fetch(fetchRequest)
+        print(objects?[0].date)
         RequestManager.request(requestType: .getWeather(lat: lat, lon: lon)) { [weak self] result in
             switch result {
             case let .success(data):
@@ -28,16 +48,25 @@ class MainPresenterImp: MainPresenter {
                     
                     let currentTemperature = forecast.fact.temp
                     let currentCondition = forecast.fact.condition
-                    let forecastt = forecast.forecasts[1].parts.day.tempMax
                     
-                    print("Current Temperature: \(currentTemperature)°C")
                     self?.view?.setupTempLabel(currentTemperature)
-                    print("Current Condition: \(currentCondition)")
                     self?.setDescription(key: currentCondition)
-                   
-                    print(forecastt)
+                    
+                    forecast.forecasts.forEach { data in
+                        let person = Weather(context: self?.context ?? NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
+                        person.date = data.date
+                        person.tempMin = String(data.parts.day.tempMin)
+                        person.tempMax = String(data.parts.day.tempMax)
+                        person.forecast = data.parts.day.condition
+                        self?.saveContext()
+                    }
+                    
+                    let notificationName = Notification.Name("Forecast")
+                    let userInfo: [String: [Forecast]] = ["weather" : forecast.forecasts]
+                    NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
+                    self?.view?.hideLoading()
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    print("JSON ERROR IN getWeather: \(error)")
                 }
             case let .failure(error):
                 print(error)
@@ -45,69 +74,42 @@ class MainPresenterImp: MainPresenter {
         }
     }
     
-    func getGeo(query: String) {
-        RequestManager.request(requestType: .getGeo(query: "rbckjdjlcr")) { [weak self] result in
-            switch result {
-            case let .success(data):
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let suggestionsResponse = try decoder.decode(AddressSuggestionsResponse.self, from: data)
-                    
-                    print(suggestionsResponse.suggestions.count)
-                        let address = suggestionsResponse.suggestions[0].value
-                        let lat = suggestionsResponse.suggestions[0].data.geoLat
-                        let lon = suggestionsResponse.suggestions[0].data.geoLon
-                        
-                        print("Address: \(address)")
-                        self?.view?.setupCityLabel("\(address)")
-                        print("lat: \(lat)")
-                        print("lon: \(lon)")
-//
-                } catch {
-                    print("Error decoding JSON: \(error)")
-                }
-            case let .failure(error):
-                print(error)
+    func saveContext () {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                context.rollback()
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
-
-    private func setDescription(key: String) {
-        let weatherDescriptions: [String: String] = [
-            "clear": "Ясно",
-            "partly-cloudy": "Малооблачно",
-            "cloudy": "Облачно с прояснениями",
-            "overcast": "Пасмурно",
-            "partly-cloudy-and-light-rain": "Малооблачно, небольшой дождь",
-            "partly-cloudy-and-rain": "Малооблачно, дождь",
-            "overcast-and-rain": "Значительная облачность, сильный дождь",
-            "overcast-thunderstorms-with-rain": "Сильный дождь с грозой",
-            "cloudy-and-light-rain": "Облачно, небольшой дождь",
-            "overcast-and-light-rain": "Значительная облачность, небольшой дождь",
-            "cloudy-and-rain": "Облачно, дождь",
-            "overcast-and-wet-snow": "Дождь со снегом",
-            "partly-cloudy-and-light-snow": "Небольшой снег",
-            "partly-cloudy-and-snow": "Малооблачно, снег",
-            "overcast-and-snow": "Снегопад",
-            "cloudy-and-light-snow": "Облачно, небольшой снег",
-            "overcast-and-light-snow": "Значительная облачность, небольшой снег",
-            "cloudy-and-snow": "Облачно, снег"
-        ]
-        let dic = ["sun" : ["Ясно"],
-                   "easyCloud" : ["Малооблачно","Облачно с прояснениями"],
-                   "hardCloud" : ["Пасмурно","Облачно, небольшой дождь", "Значительная облачность, небольшой дождь"],
-                   "rain" : ["Малооблачно, небольшой дождь", "Малооблачно, дождь","Сильный дождь с грозой", "Облачно, дождь", "Значительная облачность, сильный дождь"],
-                   "snow" : ["Дождь со снегом","Небольшой снег","Малооблачно, снег","Снегопад","Облачно, небольшой снег","Значительная облачность, небольшой снег","Облачно, снег"]]
-        if let weatherDescription = weatherDescriptions[key] {
-            view?.setupDescriptionLabel(weatherDescription)
-            dic.forEach { key, value in
-                if value.contains(weatherDescription) {
-                    view?.setupImage(key)
+    
+    func reverseGeocode(location: CLLocation) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if let error = error {
+                print("Ошибка обратного геокодирования: \(error.localizedDescription)")
+                return
+            }
+            if let placemark = placemarks?.first {
+                if let city = placemark.locality {
+                    self.view?.setupCityLabel("\(city)")
                 }
             }
-        } else {
-            view?.setupDescriptionLabel("У погоды нет плохой погоды! :)")
         }
+    }
+    
+    private func setDescription(key: String) {
+        let weatherDescription = DescriptionTranslate.translate(key: key)
+        view?.setupDescriptionLabel(weatherDescription)
+        let imageName = DescriptionTranslate.generateImage(text: weatherDescription)
+        view?.setupImage(imageName)
+    }
+    
+    func openSearchScene() {
+        router.openSearchScene()
     }
 }
+

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 struct RequestManager {
     
     static func request(requestType: Request, complition: @escaping (CustomResult) -> Void) {
