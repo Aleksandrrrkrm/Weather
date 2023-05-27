@@ -35,7 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let mainViewController = navController.viewControllers.first as? MainViewController else {
                 return
         }
-        
         mainViewController.checkLocationPermision()
     }
     

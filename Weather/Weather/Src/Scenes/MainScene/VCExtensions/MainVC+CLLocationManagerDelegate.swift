@@ -18,7 +18,9 @@ extension MainViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location error: \(error)")
+#if DEBUG
+                    print("!!!!!ERROR IN MainViewController locationManager: \(error)")
+#endif
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

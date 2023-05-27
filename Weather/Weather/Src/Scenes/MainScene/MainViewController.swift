@@ -23,15 +23,15 @@ class MainViewController: UIViewController {
         .alignment(.center)
         .setManyLines()
         .color(UIColor.white)
-        .font(UIFont(name: "Montserrat-Bold", size: 30) ?? UIFont())
+        .font(UIFont(name: Strings.montserratBold.rawValue, size: 30) ?? UIFont())
     
     var tempLabel = UILabel()
         .color(UIColor.white)
-        .font(UIFont(name: "Montserrat-SemiBold", size: 80) ?? UIFont())
+        .font(UIFont(name: Strings.montserratSemiBold.rawValue, size: 80) ?? UIFont())
     
     var descriptionLabel = UILabel()
         .color(UIColor.white)
-        .font(UIFont(name: "Montserrat-Medium", size: 20) ?? UIFont())
+        .font(UIFont(name: Strings.montserratMedium.rawValue, size: 20) ?? UIFont())
     
     var imageView = UIImageView()
     
@@ -43,7 +43,7 @@ class MainViewController: UIViewController {
         locationManager.delegate = self
         let notificationName = Notification.Name("NewCity")
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: notificationName, object: nil)
-        checkLocationPermision()
+//        checkLocationPermision()
         setupAllView()
     }
     
@@ -57,8 +57,7 @@ class MainViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.startUpdatingLocation()
         } else {
-            presenter?.getWeather(lat: "55.751244", lon: "37.618423")
-            presenter?.reverseGeocode(location: CLLocation(latitude: 55.751244, longitude: 37.618423))
+            getWeatherForecast(for: defaultLocation)
             
         }
     }
@@ -87,8 +86,7 @@ class MainViewController: UIViewController {
                 let locationLon = CLLocationDegrees(doubleLon)
                 
                 let location = CLLocation(latitude: locationLat, longitude: locationLon)
-                presenter?.getWeather(lat: "\(location.coordinate.latitude)", lon: "\(location.coordinate.longitude)")
-                presenter?.reverseGeocode(location: location)
+                getWeatherForecast(for: location)
             }
         }
     }
@@ -139,8 +137,8 @@ extension MainViewController: MainView {
     func showInternetAlert() {
         hideLoading()
         DispatchQueue.main.async {
-            CustomAlertController.showAlert(withTitle: "Информация о погоде недоступна",
-                                            message: "Приложение 'Weather' не подключено к интернету.\nПроверьте интернет соединение.",
+            CustomAlertController.showAlert(withTitle: Strings.weatherInfoNotAvailable.rawValue,
+                                            message: Strings.checkInternetConnection.rawValue,
                                             viewController: self) {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     if UIApplication.shared.canOpenURL(url) {

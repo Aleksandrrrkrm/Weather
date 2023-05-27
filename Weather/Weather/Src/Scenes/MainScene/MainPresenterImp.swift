@@ -14,6 +14,7 @@ class MainPresenterImp: MainPresenter {
     private weak var view: MainView?
     private let router: MainRouter
     private let coreDataGateway: CoreDataGateway
+    private var isFirstRequest = true
     
     init(_ view: MainView,
          _ router: MainRouter,
@@ -37,15 +38,16 @@ class MainPresenterImp: MainPresenter {
                     self?.view?.setupTempLabel(currentTemperature)
                     self?.setDescription(key: currentCondition)
                     
-                    self?.coreDataGateway.deleteAllNews()
-                    self?.coreDataGateway.saveNews(forecast.forecasts, completion: nil)
+                    self?.saveData(forecast.forecasts)
                     
                     let notificationName = Notification.Name("Forecast")
                     let userInfo: [String: [Forecast]] = ["weather" : forecast.forecasts]
                     NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
                     self?.view?.hideLoading()
                 } catch {
-                    print("JSON ERROR IN getWeather: \(error)")
+#if DEBUG
+                    print("!!!!!ERROR IN MainPresenterImp getWeather: \(error)")
+#endif
                 }
             case let .failure(error):
                 print(error)
@@ -64,7 +66,9 @@ class MainPresenterImp: MainPresenter {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             if let error = error {
-                print("Ошибка обратного геокодирования: \(error.localizedDescription)")
+#if DEBUG
+                    print("!!!!!ERROR IN MainPresenterImp reverseGeocode: \(error.localizedDescription)")
+#endif
                 return
             }
             if let placemark = placemarks?.first {
@@ -72,6 +76,15 @@ class MainPresenterImp: MainPresenter {
                     self.view?.setupCityLabel("\(city)")
                 }
             }
+        }
+    }
+    
+    private func saveData(_ data: [Forecast]) {
+        
+        if isFirstRequest {
+            coreDataGateway.deleteAllNews()
+            coreDataGateway.saveNews(data, completion: nil)
+            isFirstRequest = false
         }
     }
     

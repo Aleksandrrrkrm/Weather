@@ -50,6 +50,8 @@
 		C247CA7B2A21E4CA00990E6C /* Weather+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA792A21E4CA00990E6C /* Weather+CoreDataClass.swift */; };
 		C247CA7C2A21E4CA00990E6C /* Weather+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA7A2A21E4CA00990E6C /* Weather+CoreDataProperties.swift */; };
 		C247CA7E2A21F24A00990E6C /* MainVC+AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA7D2A21F24A00990E6C /* MainVC+AlertController.swift */; };
+		C247CA812A220D0400990E6C /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA802A220D0400990E6C /* Strings.swift */; };
+		C247CA842A2211B900990E6C /* JustForButtonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA832A2211B900990E6C /* JustForButtonScene.swift */; };
 		C2D424C32A1E6C01009D3E0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D424C22A1E6C01009D3E0F /* AppDelegate.swift */; };
 		C2D424C52A1E6C01009D3E0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D424C42A1E6C01009D3E0F /* SceneDelegate.swift */; };
 		C2D424CD2A1E6C01009D3E0F /* Weather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C2D424CB2A1E6C01009D3E0F /* Weather.xcdatamodeld */; };
@@ -102,6 +104,8 @@
 		C247CA792A21E4CA00990E6C /* Weather+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weather+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C247CA7A2A21E4CA00990E6C /* Weather+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weather+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C247CA7D2A21F24A00990E6C /* MainVC+AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+AlertController.swift"; sourceTree = "<group>"; };
+		C247CA802A220D0400990E6C /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		C247CA832A2211B900990E6C /* JustForButtonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustForButtonScene.swift; sourceTree = "<group>"; };
 		C2D424BF2A1E6C01009D3E0F /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2D424C22A1E6C01009D3E0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2D424C42A1E6C01009D3E0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -282,6 +286,22 @@
 			path = CoreDataService;
 			sourceTree = "<group>";
 		};
+		C247CA7F2A220CF800990E6C /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				C247CA802A220D0400990E6C /* Strings.swift */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		C247CA822A22119500990E6C /* JustForButtonScene */ = {
+			isa = PBXGroup;
+			children = (
+				C247CA832A2211B900990E6C /* JustForButtonScene.swift */,
+			);
+			path = JustForButtonScene;
+			sourceTree = "<group>";
+		};
 		C2D424B62A1E6C01009D3E0F = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +352,7 @@
 		C2D424DB2A1E6F68009D3E0F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C247CA7F2A220CF800990E6C /* Strings */,
 				C23F7EBE2A1F76F700BFAE00 /* Models */,
 				C23F7EC32A1FA04500BFAE00 /* Fonts */,
 				C2D424CE2A1E6C02009D3E0F /* Assets.xcassets */,
@@ -363,6 +384,7 @@
 				C2D424DF2A1E6FB2009D3E0F /* LaunchScreen */,
 				C2D424E22A1E7019009D3E0F /* RootTabBarController */,
 				C2D424E02A1E6FC4009D3E0F /* MainScene */,
+				C247CA822A22119500990E6C /* JustForButtonScene */,
 				C23F7ED62A1FDBD200BFAE00 /* SearchCityScene */,
 				C2D424E12A1E6FF8009D3E0F /* ForecastScene */,
 			);
@@ -487,6 +509,7 @@
 			files = (
 				C23F7EB62A1F3EC400BFAE00 /* RequestManager.swift in Sources */,
 				C23F7EDE2A1FDBEE00BFAE00 /* SearchCityRouter.swift in Sources */,
+				C247CA842A2211B900990E6C /* JustForButtonScene.swift in Sources */,
 				C2239C752A1E7167008C3936 /* MainRouter.swift in Sources */,
 				C2239C782A1E7167008C3936 /* MainConfigurator.swift in Sources */,
 				C23F7EF82A20B5EE00BFAE00 /* DescriptionTranslate.swift in Sources */,
@@ -522,6 +545,7 @@
 				C23F7EE62A1FDBFE00BFAE00 /* SearchCityView.swift in Sources */,
 				C23F7EE12A1FDBEE00BFAE00 /* SearchCityConfigurator.swift in Sources */,
 				C23F7EBD2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift in Sources */,
+				C247CA812A220D0400990E6C /* Strings.swift in Sources */,
 				C2239C8C2A1E71A6008C3936 /* ForecastView.swift in Sources */,
 				C2239C832A1E717A008C3936 /* ForecastPresenterImp.swift in Sources */,
 				C23F7EF32A20979F00BFAE00 /* TableViewCell.swift in Sources */,

@@ -33,7 +33,7 @@ class CoreDataGatewayImp: CoreDataGateway {
         }
         do {
             var dataModel: [Forecast] = []
-            var data = try coreDataStack.managedContext.fetch(fetchRequest)
+            let data = try coreDataStack.managedContext.fetch(fetchRequest)
             data.forEach {
                 dataModel.append(Forecast(date: $0.date ?? "",
                                           parts: Part(day: Day(tempMin: 0, tempMax: $0.tempMax,
