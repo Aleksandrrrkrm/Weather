@@ -36,7 +36,9 @@ final class CoredataStack {
         let container = NSPersistentContainer(name: modelName)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                print("Unresolved error \(error), \(error.userInfo)")
+#if DEBUG
+                print("ошибка persistentContainer \(error), \(error.userInfo)")
+#endif
             }
         })
         return container
@@ -53,7 +55,9 @@ final class CoredataStack {
             } catch {
                 managedContext.rollback()
                 let nserror = error as NSError
-                print("Unresolved error \(nserror), \(nserror.userInfo)")
+#if DEBUG
+                print("ошибка saveContext \(nserror), \(nserror.userInfo)")
+#endif
             }
         }
     }

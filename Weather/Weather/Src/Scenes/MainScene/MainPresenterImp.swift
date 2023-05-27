@@ -11,14 +11,20 @@ import CoreData
 
 class MainPresenterImp: NSObject, MainPresenter {
     
+    // MARK: - Dependencies
     private weak var view: MainView?
     private let router: MainRouter
     private let coreDataGateway: CoreDataGateway
+    
+    // MARK: - Properties
     private var isFirstRequest = true
+    private var lastAuthorizationStatusCL: CLAuthorizationStatus?
+    private var lastLocation: CLLocation?
     
     let locationManager = CLLocationManager()
     let defaultLocation = CLLocation(latitude: 55.751244, longitude: 37.618423)
     
+    // MARK: - Init
     init(_ view: MainView,
          _ router: MainRouter,
          _ coreDataGetaway: CoreDataGateway) {
@@ -27,6 +33,7 @@ class MainPresenterImp: NSObject, MainPresenter {
         self.coreDataGateway = coreDataGetaway
     }
     
+    // MARK: - API method
     func getWeather(lat: String, lon: String) {
         RequestManager.request(requestType: .getWeather(lat: lat, lon: lon)) { [weak self] result in
             switch result {
@@ -49,15 +56,13 @@ class MainPresenterImp: NSObject, MainPresenter {
                     self?.view?.hideLoading()
                 } catch {
 #if DEBUG
-                    print("!!!!!ERROR IN MainPresenterImp getWeather: \(error)")
+                    print("ошибка getWeather: \(error)")
 #endif
                 }
-            case let .failure(error):
-                print(error)
+            case .failure:
                 self?.view?.showInternetAlert()
-//                self?.performInMainThread(self?.view?.showInternetAlert())
                 let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-                guard let cashe = self?.coreDataGateway.getNews(sortDescriptors: [sortDescriptor]) else { return }
+                guard let cashe = self?.coreDataGateway.getData(sortDescriptors: [sortDescriptor]) else { return }
                 let notificationName = Notification.Name("Forecast")
                 let userInfo: [String: [Forecast]] = ["weather" : cashe]
                 NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
@@ -66,12 +71,13 @@ class MainPresenterImp: NSObject, MainPresenter {
         }
     }
     
+    // MARK: - Location methods
     func reverseGeocode(location: CLLocation) {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             if let error = error {
 #if DEBUG
-                print("!!!!!ERROR IN MainPresenterImp reverseGeocode: \(error.localizedDescription)")
+                print("ошибка reverseGeocode: \(error.localizedDescription)")
 #endif
                 return
             }
@@ -83,15 +89,40 @@ class MainPresenterImp: NSObject, MainPresenter {
         }
     }
     
+    func checkAuthorizationStatus() {
+        guard let lastAuthorizationStatusCL else { return }
+        let status = locationManager.authorizationStatus
+        if status != lastAuthorizationStatusCL {
+            self.checkLocationPermision()
+        } else {
+            guard let lastLocation else { return }
+            getWeatherForecast(for: lastLocation)
+        }
+    }
+    
+    func checkLocationPermision() {
+        view?.showLoading()
+        let status = locationManager.authorizationStatus
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else if status == .authorizedWhenInUse || status == .authorizedAlways {
+            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+            locationManager.startUpdatingLocation()
+        } else {
+            getWeatherForecast(for: defaultLocation)
+        }
+    }
+    
+    // MARK: - Core Data methods
     private func saveData(_ data: [Forecast]) {
-        
         if isFirstRequest {
-            coreDataGateway.deleteAllNews()
-            coreDataGateway.saveNews(data, completion: nil)
+            coreDataGateway.deleteAllData()
+            coreDataGateway.saveData(data, completion: nil)
             isFirstRequest = false
         }
     }
     
+    // MARK: - Helpers
     private func setDescription(key: String) {
         let weatherDescription = DescriptionTranslate.translate(key: key)
         view?.setupDescriptionLabel(weatherDescription)
@@ -103,20 +134,10 @@ class MainPresenterImp: NSObject, MainPresenter {
         router.openSearchScene()
     }
     
-//    private func performInMainThread(_ block: @escaping () -> ()) {
-//        if Thread.isMainThread {
-//            block()
-//        } else {
-//            DispatchQueue.main.async {
-//                block()
-//            }
-//        }
-//    }
-    
     @objc func handleNotification(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             if let value = userInfo["NewCity"] as? AddressSuggestion {
-                
+
                 guard let lat = value.data.geoLat,
                       let lon = value.data.geoLon else { return }
                 
@@ -131,8 +152,16 @@ class MainPresenterImp: NSObject, MainPresenter {
             }
         }
     }
+    
+    func getWeatherForecast(for location: CLLocation) {
+        lastLocation = location
+        getWeather(lat: "\(location.coordinate.latitude)",
+                              lon: "\(location.coordinate.longitude)")
+        reverseGeocode(location: location)
+    }
 }
 
+// MARK: - Location manager delegate extension
 extension MainPresenterImp: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -145,11 +174,12 @@ extension MainPresenterImp: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 #if DEBUG
-                    print("!!!!!ERROR IN MainViewController locationManager: \(error)")
+                    print("ошибка locationManager: \(error)")
 #endif
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        lastAuthorizationStatusCL = status
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -160,25 +190,6 @@ extension MainPresenterImp: CLLocationManagerDelegate {
             locationManager.requestWhenInUseAuthorization()
         @unknown default:
             break
-        }
-    }
-    
-    func getWeatherForecast(for location: CLLocation) {
-        getWeather(lat: "\(location.coordinate.latitude)",
-                              lon: "\(location.coordinate.longitude)")
-        reverseGeocode(location: location)
-    }
-    
-    func checkLocationPermision() {
-        view?.showLoading()
-        let status = locationManager.authorizationStatus
-        if status == .notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-        } else if status == .authorizedWhenInUse || status == .authorizedAlways {
-            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            locationManager.startUpdatingLocation()
-        } else {
-            getWeatherForecast(for: defaultLocation)
         }
     }
 }

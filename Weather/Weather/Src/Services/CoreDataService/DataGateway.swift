@@ -9,11 +9,11 @@ import CoreData
 
 protocol CoreDataGateway: AnyObject {
     
-    func getNews(sortDescriptors: [NSSortDescriptor]?) -> [Forecast]?
+    func getData(sortDescriptors: [NSSortDescriptor]?) -> [Forecast]?
     
-    func deleteAllNews()
+    func deleteAllData()
     
-    func saveNews(_ data: [Forecast], completion: (() -> ())?)
+    func saveData(_ data: [Forecast], completion: (() -> ())?)
     
     func saveContext()
 }
@@ -26,7 +26,7 @@ class CoreDataGatewayImp: CoreDataGateway {
         self.coreDataStack = coreDataStack
     }
     
-    func getNews(sortDescriptors: [NSSortDescriptor]?) -> [Forecast]? {
+    func getData(sortDescriptors: [NSSortDescriptor]?) -> [Forecast]? {
         let fetchRequest: NSFetchRequest<Weather> = Weather.fetchRequest()
         if let sortDescriptors {
             fetchRequest.sortDescriptors = sortDescriptors
@@ -42,13 +42,13 @@ class CoreDataGatewayImp: CoreDataGateway {
             return dataModel
         } catch let error {
 #if DEBUG
-            print("ошибка получения новостей \(error.localizedDescription)")
+            print("ошибка getData \(error.localizedDescription)")
 #endif
             return nil
         }
     }
     
-    func deleteAllNews() {
+    func deleteAllData() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Weather")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         deleteRequest.resultType = .resultTypeObjectIDs
@@ -61,12 +61,12 @@ class CoreDataGatewayImp: CoreDataGateway {
             
         } catch let error {
 #if DEBUG
-            print("ошибка удаления\(error.localizedDescription)")
+            print("ошибка удаления \(error.localizedDescription)")
 #endif
         }
     }
     
-    func saveNews(_ data: [Forecast], completion: (() -> ())?) {
+    func saveData(_ data: [Forecast], completion: (() -> ())?) {
         coreDataStack.backgroundContext.perform { [weak self] in
             guard let context = self?.coreDataStack.backgroundContext else {
                 return
@@ -86,7 +86,7 @@ class CoreDataGatewayImp: CoreDataGateway {
                 }
             } catch let error {
 #if DEBUG
-                print("ошибка сохраненияфя\(error.localizedDescription)")
+                print("ошибка сохранения \(error.localizedDescription)")
 #endif
             }
         }

@@ -13,5 +13,8 @@ import UIKit
 protocol SearchCityView: AnyObject {
     
     func reloadTableView()
+    
     func hideLoading()
+    
+    func showInternetAlert()
 }

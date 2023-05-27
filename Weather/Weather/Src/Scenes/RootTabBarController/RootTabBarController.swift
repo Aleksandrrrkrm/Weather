@@ -52,11 +52,6 @@ final class RootTabBarController: UITabBarController {
     private func setupCenterButton() {
         let centerButton = UIButton(type: .custom)
         let buttonSize: CGFloat = view.bounds.height / 10
-        let inset = view.bounds.height / 40
-        centerButton.frame = CGRect(x: (tabBar.bounds.width - buttonSize) / 2,
-                                    y: (tabBar.bounds.height - buttonSize) / 2 - inset,
-                                    width: buttonSize,
-                                    height: buttonSize)
         centerButton.layer.shadowColor = UIColor.black.cgColor
         centerButton.layer.shadowOffset = CGSize(width: 0, height: 6)
         centerButton.layer.shadowRadius = 8
@@ -66,6 +61,13 @@ final class RootTabBarController: UITabBarController {
         centerButton.addTarget(self, action: #selector(tabButtonTapped), for: .touchUpInside)
         
         tabBar.addSubview(centerButton)
+        centerButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            centerButton.widthAnchor.constraint(equalToConstant: buttonSize),
+            centerButton.heightAnchor.constraint(equalToConstant: buttonSize),
+            centerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            centerButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor)
+        ])
     }
     
     @objc private func tabButtonTapped() {

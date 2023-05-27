@@ -18,8 +18,6 @@ class ForecastViewController: UIViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         ForecastConfigurator.configure(view: self)
-//        let notificationName = Notification.Name("Forecast")
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: notificationName, object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -44,7 +42,7 @@ class ForecastViewController: UIViewController {
         super.viewWillAppear(animated)
         
         showLoading()
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     private func setupTableView() {
@@ -61,32 +59,32 @@ class ForecastViewController: UIViewController {
         ])
     }
     
-//    @objc func handleNotification(_ notification: Notification) {
-//        if let userInfo = notification.userInfo {
-//            if let value = userInfo["weather"] as? [Forecast] {
-//                presenter?.setData(data: value)
-//                reloadTableView()
-//                hideLoading()
-//            }
-//        }
-//    }
-    
     func showLoading() {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
+    }
+    
+    private func performInMainThread(_ block: @escaping () -> ()) {
+        if Thread.isMainThread {
+            block()
+        } else {
+            DispatchQueue.main.async {
+                block()
+            }
+        }
     }
 }
 
 extension ForecastViewController: ForecastView {
     
     func reloadTableView() {
-        DispatchQueue.main.async {
+        performInMainThread {
             self.tableView.reloadData()
         }
     }
     
     func hideLoading() {
-        DispatchQueue.main.async {
+        performInMainThread {
             self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
         }

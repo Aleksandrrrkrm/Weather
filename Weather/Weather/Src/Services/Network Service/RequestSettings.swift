@@ -34,9 +34,9 @@ struct RequestSettings {
                     "to_bound": [ "value": "city" ]
                 ] as [String : Any]
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {
-                    
-                    print("!ОШИБКА СЕТТИНГС ПРИ СОЗДАНИИ БОДИ ЗАПРОСА")
-                    
+#if DEBUG
+                    print("ошибка setupRequest")
+#endif
                     return nil
                 }
                 request.httpBody = jsonData
@@ -56,7 +56,9 @@ struct RequestSettings {
             ]
             urlComponents?.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
             guard let url = urlComponents?.url else {
-                print("!ОШИБКА СЕТТИНГС ПРИ СОЗДАНИИ ЮРЛ")
+#if DEBUG
+                print("ошибка setupRequest")
+#endif
                 return nil
             }
             request = URLRequest(url: url)

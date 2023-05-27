@@ -21,7 +21,6 @@
 		C23F7EB62A1F3EC400BFAE00 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EB52A1F3EC400BFAE00 /* RequestManager.swift */; };
 		C23F7EB82A1F3ED400BFAE00 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EB72A1F3ED400BFAE00 /* ApiClient.swift */; };
 		C23F7EBA2A1F3EE000BFAE00 /* RequestSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EB92A1F3EE000BFAE00 /* RequestSettings.swift */; };
-		C23F7EBD2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EBC2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift */; };
 		C23F7EC02A1F770B00BFAE00 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EBF2A1F770B00BFAE00 /* CityModel.swift */; };
 		C23F7EC22A1F773B00BFAE00 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EC12A1F773B00BFAE00 /* WeatherModel.swift */; };
 		C23F7EC72A1FA0B900BFAE00 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C23F7EC42A1FA0B900BFAE00 /* Montserrat-Medium.ttf */; };
@@ -72,7 +71,6 @@
 		C23F7EB52A1F3EC400BFAE00 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		C23F7EB72A1F3ED400BFAE00 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		C23F7EB92A1F3EE000BFAE00 /* RequestSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSettings.swift; sourceTree = "<group>"; };
-		C23F7EBC2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		C23F7EBF2A1F770B00BFAE00 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		C23F7EC12A1F773B00BFAE00 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		C23F7EC42A1FA0B900BFAE00 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 		C23F7EBB2A1F515400BFAE00 /* VCExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				C23F7EBC2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift */,
 				C23F7ECA2A1FA6FC00BFAE00 /* MainVC+Views.swift */,
 				C247CA7D2A21F24A00990E6C /* MainVC+AlertController.swift */,
 			);
@@ -524,7 +521,6 @@
 				C23F7EF52A2097C600BFAE00 /* ForecastVC+TableView.swift in Sources */,
 				C23F7EE62A1FDBFE00BFAE00 /* SearchCityView.swift in Sources */,
 				C23F7EE12A1FDBEE00BFAE00 /* SearchCityConfigurator.swift in Sources */,
-				C23F7EBD2A1F518700BFAE00 /* MainVC+CLLocationManagerDelegate.swift in Sources */,
 				C247CA812A220D0400990E6C /* Strings.swift in Sources */,
 				C2239C8C2A1E71A6008C3936 /* ForecastView.swift in Sources */,
 				C2239C832A1E717A008C3936 /* ForecastPresenterImp.swift in Sources */,
@@ -678,8 +674,8 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Нам нужен доступ к Вашей геолокации для определения точного прогноза погода для Вашего местоположения.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -707,8 +703,8 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Нам нужен доступ к Вашей геолокации для определения точного прогноза погода для Вашего местоположения.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

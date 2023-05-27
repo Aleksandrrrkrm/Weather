@@ -9,19 +9,23 @@ import Foundation
 
 class SearchCityPresenterImp: SearchCityPresenter {
     
+    // MARK: - Dependencies
     private weak var view: SearchCityView?
+    
+    // MARK: - Properties
     private var resultCount = 0
     private var data: [AddressSuggestion] = []
     
+    // MARK: - Init
     init(_ view: SearchCityView) {
         self.view = view
     }
     
+    // MARK: - API method
     func getGeo(query: String) {
         RequestManager.request(requestType: .getGeo(query: query)) { [weak self] result in
             switch result {
             case let .success(data):
-                
                 do {
                     let decoder = JSONDecoder()
                     let suggestionsResponse = try decoder.decode(AddressSuggestionsResponse.self, from: data)
@@ -36,15 +40,18 @@ class SearchCityPresenterImp: SearchCityPresenter {
                     self?.view?.hideLoading()
                     self?.view?.reloadTableView()
                 } catch {
-                    print("Error decoding JSON: \(error)")
+#if DEBUG
+                    print("ошибка getGeo JSON: \(error)")
+#endif
                 }
-            case let .failure(error):
-                print(error)
+            case .failure:
+                self?.view?.showInternetAlert()
             }
         }
     }
     
-    func reloadData() {
+    // MARK: - Helpers
+    private func reloadData() {
         data = []
     }
     

@@ -87,21 +87,46 @@ class SearchCityViewController: UIViewController {
             self.presenter?.getGeo(query: searchText)
         }
     }
+    
+    private func performInMainThread(_ block: @escaping () -> ()) {
+        if Thread.isMainThread {
+            block()
+        } else {
+            DispatchQueue.main.async {
+                block()
+            }
+        }
+    }
 }
 
 // MARK: - Protocol extension
 extension SearchCityViewController: SearchCityView {
     
     func reloadTableView() {
-        DispatchQueue.main.async {
+        performInMainThread {
             self.tableView.reloadData()
         }
     }
     
     func hideLoading() {
-        DispatchQueue.main.async {
+        performInMainThread {
             self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    func showInternetAlert() {
+        hideLoading()
+        performInMainThread {
+            CustomAlertController.showAlert(withTitle: Strings.weatherInfoNotAvailable.rawValue,
+                                            message: Strings.checkInternetConnection.rawValue,
+                                            viewController: self) {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            }
         }
     }
 }
