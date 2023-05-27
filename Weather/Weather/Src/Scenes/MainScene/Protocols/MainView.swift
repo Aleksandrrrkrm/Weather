@@ -15,4 +15,5 @@ protocol MainView: AnyObject {
     func setupImage(_ named: String)
     func showLoading()
     func hideLoading()
+    func showInternetAlert()
 }

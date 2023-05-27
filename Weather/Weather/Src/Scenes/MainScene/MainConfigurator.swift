@@ -11,7 +11,9 @@ enum MainConfigurator {
     
     static func configure(view: MainViewController) {
         let router = MainRouter(view)
-        let presenter = MainPresenterImp(view, router)
+        let presenter = MainPresenterImp(view,
+                                         router,
+                                         CoreDataGatewayImp(coreDataStack: CoreStack.shared))
         view.presenter = presenter
     }
     

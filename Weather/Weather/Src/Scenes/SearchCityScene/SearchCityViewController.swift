@@ -12,26 +12,32 @@ class SearchCityViewController: UIViewController {
     internal var presenter: SearchCityPresenter?
     
     var searchTimer: Timer?
-    let searchDelay: TimeInterval = 0.3
     
+    // MARK: - UI elements
     var searchBar = UISearchBar()
     var tableView = UITableView()
     var activityIndicator = UIActivityIndicatorView(style: .medium)
     
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(SearchResultTableViewCell.self, forCellReuseIdentifier: "searchCell")
         setupAllViews()
-        activityIndicator.color = .white
+        searchBar.becomeFirstResponder()
     }
     
+    // MARK: - Configure UI
     private func setupAllViews() {
         view.backgroundColor = UIColor(named: "appBlue")
         setupSearchBar()
+        setTableViewDelegate()
         setupTableView()
+        setupActivityIndicator()
+    }
+    
+    private func setupActivityIndicator() {
+        activityIndicator.color = .white
+        tableView.backgroundView = activityIndicator
     }
     
     private func setupSearchBar() {
@@ -46,9 +52,14 @@ class SearchCityViewController: UIViewController {
         ])
     }
     
+    private func setTableViewDelegate() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SearchResultTableViewCell.self, forCellReuseIdentifier: "searchCell")
+    }
+    
     private func setupTableView() {
         tableView.backgroundColor = UIColor(named: "appBlue")
-        tableView.backgroundView = activityIndicator
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -59,12 +70,7 @@ class SearchCityViewController: UIViewController {
         ])
     }
     
-    @objc func search(timer: Timer) {
-        if let searchText = timer.userInfo as? String {
-            self.presenter?.getGeo(query: searchText)
-        }
-    }
-    
+    // MARK: - Methods
     func closeScene() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.dismiss(animated: true)
@@ -76,19 +82,26 @@ class SearchCityViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
-    func hideLoading() {
-        DispatchQueue.main.async {
-            self.activityIndicator.isHidden = true
-            self.activityIndicator.stopAnimating()
+    @objc func search(timer: Timer) {
+        if let searchText = timer.userInfo as? String {
+            self.presenter?.getGeo(query: searchText)
         }
     }
 }
 
+// MARK: - Protocol extension
 extension SearchCityViewController: SearchCityView {
     
     func reloadTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+        }
+    }
+    
+    func hideLoading() {
+        DispatchQueue.main.async {
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
         }
     }
 }

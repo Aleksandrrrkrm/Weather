@@ -13,6 +13,7 @@ class MainViewController: UIViewController {
     internal var presenter: MainPresenter?
     
     let locationManager = CLLocationManager()
+    let defaultLocation = CLLocation(latitude: 55.751244, longitude: 37.618423)
     
     // MARK: - UI Elements
     var searchButton = UIButton()
@@ -26,7 +27,7 @@ class MainViewController: UIViewController {
     
     var tempLabel = UILabel()
         .color(UIColor.white)
-        .font(UIFont(name: "Montserrat-SemiBold", size: 40) ?? UIFont())
+        .font(UIFont(name: "Montserrat-SemiBold", size: 80) ?? UIFont())
     
     var descriptionLabel = UILabel()
         .color(UIColor.white)
@@ -47,7 +48,7 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - USAGE
-    private func checkLocationPermision() {
+    func checkLocationPermision() {
         showLoading()
         let status = locationManager.authorizationStatus
         if status == .notDetermined {
@@ -56,7 +57,16 @@ class MainViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.startUpdatingLocation()
         } else {
+            presenter?.getWeather(lat: "55.751244", lon: "37.618423")
+            presenter?.reverseGeocode(location: CLLocation(latitude: 55.751244, longitude: 37.618423))
+            
         }
+    }
+    
+    func getWeatherForecast(for location: CLLocation) {
+        presenter?.getWeather(lat: "\(location.coordinate.latitude)",
+                              lon: "\(location.coordinate.longitude)")
+        presenter?.reverseGeocode(location: location)
     }
     
     @objc func buttonTapped() {
@@ -95,7 +105,7 @@ extension MainViewController: MainView {
     
     func setupTempLabel(_ temp: Int) {
         DispatchQueue.main.async {
-            self.tempLabel.text = "\(temp) °C"
+            self.tempLabel.text = "\(temp)°"
         }
     }
     
@@ -122,6 +132,22 @@ extension MainViewController: MainView {
         DispatchQueue.main.async {
             self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    
+    func showInternetAlert() {
+        hideLoading()
+        DispatchQueue.main.async {
+            CustomAlertController.showAlert(withTitle: "Информация о погоде недоступна",
+                                            message: "Приложение 'Weather' не подключено к интернету.\nПроверьте интернет соединение.",
+                                            viewController: self) {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            }
         }
     }
 }

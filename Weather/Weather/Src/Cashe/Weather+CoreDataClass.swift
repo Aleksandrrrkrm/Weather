@@ -2,7 +2,7 @@
 //  Weather+CoreDataClass.swift
 //  Weather
 //
-//  Created by Александр Головин on 26.05.2023.
+//  Created by Александр Головин on 27.05.2023.
 //
 //
 

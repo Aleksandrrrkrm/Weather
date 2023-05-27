@@ -14,8 +14,7 @@ extension MainViewController: CLLocationManagerDelegate {
             return
         }
         locationManager.stopUpdatingLocation()
-        presenter?.getWeather(lat: "\(location.coordinate.latitude)", lon: "\(location.coordinate.longitude)")
-        presenter?.reverseGeocode(location: location)
+        getWeatherForecast(for: location)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -24,18 +23,13 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-        case .authorizedWhenInUse:
+        case .authorizedWhenInUse, .authorizedAlways:
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
-        case .denied:
-            break
-        case .restricted:
-            break
+        case .denied, .restricted:
+            getWeatherForecast(for: defaultLocation)
         case .notDetermined:
-            break
-        case .authorizedAlways:
-            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            locationManager.startUpdatingLocation()
+            locationManager.requestWhenInUseAuthorization()
         @unknown default:
             break
         }

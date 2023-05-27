@@ -13,32 +13,17 @@ class MainPresenterImp: MainPresenter {
     
     private weak var view: MainView?
     private let router: MainRouter
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Weather")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    lazy var context: NSManagedObjectContext = {
-        return persistentContainer.viewContext
-    }()
-    
+    private let coreDataGateway: CoreDataGateway
     
     init(_ view: MainView,
-         _ router: MainRouter) {
+         _ router: MainRouter,
+         _ coreDataGetaway: CoreDataGateway) {
         self.view = view
         self.router = router
+        self.coreDataGateway = coreDataGetaway
     }
     
     func getWeather(lat: String, lon: String) {
-        let fetchRequest: NSFetchRequest<Weather> = Weather.fetchRequest()
-        let objects = try? context.fetch(fetchRequest)
-        print(objects?[0].date)
         RequestManager.request(requestType: .getWeather(lat: lat, lon: lon)) { [weak self] result in
             switch result {
             case let .success(data):
@@ -52,14 +37,8 @@ class MainPresenterImp: MainPresenter {
                     self?.view?.setupTempLabel(currentTemperature)
                     self?.setDescription(key: currentCondition)
                     
-                    forecast.forecasts.forEach { data in
-                        let person = Weather(context: self?.context ?? NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
-                        person.date = data.date
-                        person.tempMin = String(data.parts.day.tempMin)
-                        person.tempMax = String(data.parts.day.tempMax)
-                        person.forecast = data.parts.day.condition
-                        self?.saveContext()
-                    }
+                    self?.coreDataGateway.deleteAllNews()
+                    self?.coreDataGateway.saveNews(forecast.forecasts, completion: nil)
                     
                     let notificationName = Notification.Name("Forecast")
                     let userInfo: [String: [Forecast]] = ["weather" : forecast.forecasts]
@@ -70,18 +49,13 @@ class MainPresenterImp: MainPresenter {
                 }
             case let .failure(error):
                 print(error)
-            }
-        }
-    }
-    
-    func saveContext () {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                context.rollback()
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                self?.view?.showInternetAlert()
+                let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+                guard let cashe = self?.coreDataGateway.getNews(sortDescriptors: [sortDescriptor]) else { return }
+                let notificationName = Notification.Name("Forecast")
+                let userInfo: [String: [Forecast]] = ["weather" : cashe]
+                NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
+                
             }
         }
     }

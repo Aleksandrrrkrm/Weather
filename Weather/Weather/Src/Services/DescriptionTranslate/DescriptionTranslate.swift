@@ -29,7 +29,6 @@ enum DescriptionTranslate {
             "cloudy-and-light-snow": "Облачно, небольшой снег",
             "overcast-and-light-snow": "Значительная облачность, небольшой снег",
             "cloudy-and-snow": "Облачно, снег",
-            
             "drizzle": "Морось",
             "light-rain": "Небольшой дождь",
             "rain": "Дождь",
