@@ -10,8 +10,7 @@ import UIKit
 enum SearchCityConfigurator {
     
     static func configure(view: SearchCityViewController) {
-        let router = SearchCityRouter(view)
-        let presenter = SearchCityPresenterImp(view, router)
+        let presenter = SearchCityPresenterImp(view)
         view.presenter = presenter
     }
     

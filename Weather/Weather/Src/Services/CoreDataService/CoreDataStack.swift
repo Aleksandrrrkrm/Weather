@@ -29,7 +29,6 @@ final class CoredataStack {
     lazy var backgroundContext: NSManagedObjectContext = {
         let context: NSManagedObjectContext = .init(concurrencyType: .privateQueueConcurrencyType)
         context.parent = managedContext
-        context.automaticallyMergesChangesFromParent = true
         return context
     }()
     
@@ -37,7 +36,7 @@ final class CoredataStack {
         let container = NSPersistentContainer(name: modelName)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
@@ -48,10 +47,13 @@ final class CoredataStack {
         if managedContext.hasChanges {
             do {
                 try managedContext.save()
+#if DEBUG
+                print("сохраненно")
+#endif
             } catch {
                 managedContext.rollback()
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }

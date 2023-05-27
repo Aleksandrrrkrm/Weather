@@ -10,14 +10,11 @@ import Foundation
 class ForecastPresenterImp: ForecastPresenter {
     
     private weak var view: ForecastView?
-    private let router: ForecastRouter
     
     private var data: [Forecast] = []
     
-    init(_ view: ForecastView,
-         _ router: ForecastRouter) {
+    init(_ view: ForecastView) {
         self.view = view
-        self.router = router
     }
     
     func setData(data: [Forecast]) {
@@ -26,5 +23,15 @@ class ForecastPresenterImp: ForecastPresenter {
     
     func getData() -> [Forecast] {
         data
+    }
+    
+    @objc func handleNotification(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let value = userInfo["weather"] as? [Forecast] {
+                setData(data: value)
+                view?.reloadTableView()
+                view?.hideLoading()
+            }
+        }
     }
 }

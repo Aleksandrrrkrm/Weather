@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let mainViewController = navController.viewControllers.first as? MainViewController else {
                 return
         }
-        mainViewController.checkLocationPermision()
+        mainViewController.presenter?.checkLocationPermision()
     }
     
     func sceneWillResignActive(_ scene: UIScene) {

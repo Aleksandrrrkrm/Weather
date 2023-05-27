@@ -13,10 +13,6 @@ class SearchResultTableViewCell: UITableViewCell {
         .font(UIFont(name: "Montserrat-SemiBold", size: 18) ?? UIFont())
         .color(.white)
     
-    // MARK: - Private properties
-    private var lon = ""
-    private var lat = ""
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -50,7 +46,5 @@ class SearchResultTableViewCell: UITableViewCell {
     // MARK: - Setup cell
     func setupCell(_ data: AddressSuggestion) {
         label.text = data.value
-        lat = data.data.geoLat ?? ""
-        lon = data.data.geoLon ?? ""
     }
 }

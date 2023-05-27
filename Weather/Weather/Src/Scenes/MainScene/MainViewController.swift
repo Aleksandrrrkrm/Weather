@@ -40,27 +40,26 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         MainConfigurator.configure(view: self)
-        locationManager.delegate = self
-        let notificationName = Notification.Name("NewCity")
-        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: notificationName, object: nil)
-//        checkLocationPermision()
+        //        locationManager.delegate = self
+//        let notificationName = Notification.Name("NewCity")
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: notificationName, object: nil)
+        //        checkLocationPermision()
         setupAllView()
     }
     
     // MARK: - USAGE
-    func checkLocationPermision() {
-        showLoading()
-        let status = locationManager.authorizationStatus
-        if status == .notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-        } else if status == .authorizedWhenInUse || status == .authorizedAlways {
-            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            locationManager.startUpdatingLocation()
-        } else {
-            getWeatherForecast(for: defaultLocation)
-            
-        }
-    }
+    //    func checkLocationPermision() {
+    //        showLoading()
+    //        let status = locationManager.authorizationStatus
+    //        if status == .notDetermined {
+    //            locationManager.requestWhenInUseAuthorization()
+    //        } else if status == .authorizedWhenInUse || status == .authorizedAlways {
+    //            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+    //            locationManager.startUpdatingLocation()
+    //        } else {
+    //            getWeatherForecast(for: defaultLocation)
+    //        }
+    //    }
     
     func getWeatherForecast(for location: CLLocation) {
         presenter?.getWeather(lat: "\(location.coordinate.latitude)",
@@ -72,24 +71,24 @@ class MainViewController: UIViewController {
         presenter?.openSearchScene()
     }
     
-    @objc func handleNotification(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let value = userInfo["NewCity"] as? AddressSuggestion {
-                
-                guard let lat = value.data.geoLat,
-                      let lon = value.data.geoLon else { return }
-                
-                guard let doubleLat = Double(lat),
-                      let doubleLon = Double(lon) else { return }
-                
-                let locationLat = CLLocationDegrees(doubleLat)
-                let locationLon = CLLocationDegrees(doubleLon)
-                
-                let location = CLLocation(latitude: locationLat, longitude: locationLon)
-                getWeatherForecast(for: location)
-            }
-        }
-    }
+//    @objc func handleNotification(_ notification: Notification) {
+//        if let userInfo = notification.userInfo {
+//            if let value = userInfo["NewCity"] as? AddressSuggestion {
+//                
+//                guard let lat = value.data.geoLat,
+//                      let lon = value.data.geoLon else { return }
+//                
+//                guard let doubleLat = Double(lat),
+//                      let doubleLon = Double(lon) else { return }
+//                
+//                let locationLat = CLLocationDegrees(doubleLat)
+//                let locationLon = CLLocationDegrees(doubleLon)
+//                
+//                let location = CLLocation(latitude: locationLat, longitude: locationLon)
+//                getWeatherForecast(for: location)
+//            }
+//        }
+//    }
 }
 
 // MARK: Protocol extension

@@ -10,14 +10,11 @@ import Foundation
 class SearchCityPresenterImp: SearchCityPresenter {
     
     private weak var view: SearchCityView?
-    private let router: SearchCityRouter
     private var resultCount = 0
     private var data: [AddressSuggestion] = []
     
-    init(_ view: SearchCityView,
-         _ router: SearchCityRouter) {
+    init(_ view: SearchCityView) {
         self.view = view
-        self.router = router
     }
     
     func getGeo(query: String) {

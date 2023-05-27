@@ -15,6 +15,9 @@ enum MainConfigurator {
                                          router,
                                          CoreDataGatewayImp(coreDataStack: CoreStack.shared))
         view.presenter = presenter
+        presenter.locationManager.delegate = presenter
+        let notificationName = Notification.Name("NewCity")
+        NotificationCenter.default.addObserver(presenter, selector: #selector(presenter.handleNotification(_:)), name: notificationName, object: nil)
     }
     
     static func open(navigationController: UINavigationController) {

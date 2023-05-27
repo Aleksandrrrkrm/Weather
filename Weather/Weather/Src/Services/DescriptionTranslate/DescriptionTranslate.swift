@@ -48,7 +48,7 @@ enum DescriptionTranslate {
         if let weatherDescription = weatherDescriptions[key] {
             return weatherDescription
         } else {
-            return "У погоды нет плохой погоды! :)"
+            return "Переменная облачность"
         }
     }
     

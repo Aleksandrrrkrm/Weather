@@ -10,9 +10,10 @@ import UIKit
 enum ForecastConfigurator {
     
     static func configure(view: ForecastViewController) {
-        let router = ForecastRouter(view)
-        let presenter = ForecastPresenterImp(view, router)
+        let presenter = ForecastPresenterImp(view)
         view.presenter = presenter
+        let notificationName = Notification.Name("Forecast")
+        NotificationCenter.default.addObserver(presenter, selector: #selector(presenter.handleNotification(_:)), name: notificationName, object: nil)
     }
     
     static func open(navigationController: UINavigationController) {

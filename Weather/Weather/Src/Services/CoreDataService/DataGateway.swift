@@ -80,9 +80,6 @@ class CoreDataGatewayImp: CoreDataGateway {
             
             do {
                 try context.save()
-#if DEBUG
-                print("сохраненно")
-#endif
                 DispatchQueue.main.async {
                     self?.saveContext()
                     completion?()

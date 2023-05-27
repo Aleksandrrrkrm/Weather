@@ -9,4 +9,7 @@ import UIKit
 
 protocol ForecastView: AnyObject {
     
+    func reloadTableView()
+    
+    func hideLoading()
 }

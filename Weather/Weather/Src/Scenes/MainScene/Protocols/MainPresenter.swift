@@ -13,4 +13,6 @@ protocol MainPresenter {
     func getWeather(lat: String, lon: String)
     func reverseGeocode(location: CLLocation)
     func openSearchScene()
+    func checkLocationPermision()
+    func handleNotification(_ notification: Notification)
 }

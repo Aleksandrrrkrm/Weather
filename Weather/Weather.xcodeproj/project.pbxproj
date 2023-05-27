@@ -11,7 +11,6 @@
 		C2239C762A1E7167008C3936 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2239C702A1E7167008C3936 /* MainViewController.swift */; };
 		C2239C772A1E7167008C3936 /* MainPresenterImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2239C712A1E7167008C3936 /* MainPresenterImp.swift */; };
 		C2239C782A1E7167008C3936 /* MainConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2239C722A1E7167008C3936 /* MainConfigurator.swift */; };
-		C2239C812A1E717A008C3936 /* ForecastRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2239C7B2A1E717A008C3936 /* ForecastRouter.swift */; };
 		C2239C822A1E717A008C3936 /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2239C7C2A1E717A008C3936 /* ForecastViewController.swift */; };
 		C2239C832A1E717A008C3936 /* ForecastPresenterImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2239C7D2A1E717A008C3936 /* ForecastPresenterImp.swift */; };
 		C2239C842A1E717A008C3936 /* ForecastConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2239C7E2A1E717A008C3936 /* ForecastConfigurator.swift */; };
@@ -32,7 +31,6 @@
 		C23F7ECE2A1FA88100BFAE00 /* ExtLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ECD2A1FA88100BFAE00 /* ExtLabel.swift */; };
 		C23F7ED02A1FA8D700BFAE00 /* ExtButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ECF2A1FA8D700BFAE00 /* ExtButton.swift */; };
 		C23F7ED52A1FBC0D00BFAE00 /* ExtImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ED42A1FBC0D00BFAE00 /* ExtImageView.swift */; };
-		C23F7EDE2A1FDBEE00BFAE00 /* SearchCityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ED82A1FDBEE00BFAE00 /* SearchCityRouter.swift */; };
 		C23F7EDF2A1FDBEE00BFAE00 /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7ED92A1FDBEE00BFAE00 /* SearchCityViewController.swift */; };
 		C23F7EE02A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EDA2A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift */; };
 		C23F7EE12A1FDBEE00BFAE00 /* SearchCityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F7EDB2A1FDBEE00BFAE00 /* SearchCityConfigurator.swift */; };
@@ -51,7 +49,6 @@
 		C247CA7C2A21E4CA00990E6C /* Weather+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA7A2A21E4CA00990E6C /* Weather+CoreDataProperties.swift */; };
 		C247CA7E2A21F24A00990E6C /* MainVC+AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA7D2A21F24A00990E6C /* MainVC+AlertController.swift */; };
 		C247CA812A220D0400990E6C /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA802A220D0400990E6C /* Strings.swift */; };
-		C247CA842A2211B900990E6C /* JustForButtonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247CA832A2211B900990E6C /* JustForButtonScene.swift */; };
 		C2D424C32A1E6C01009D3E0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D424C22A1E6C01009D3E0F /* AppDelegate.swift */; };
 		C2D424C52A1E6C01009D3E0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D424C42A1E6C01009D3E0F /* SceneDelegate.swift */; };
 		C2D424CD2A1E6C01009D3E0F /* Weather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C2D424CB2A1E6C01009D3E0F /* Weather.xcdatamodeld */; };
@@ -65,7 +62,6 @@
 		C2239C702A1E7167008C3936 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C2239C712A1E7167008C3936 /* MainPresenterImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterImp.swift; sourceTree = "<group>"; };
 		C2239C722A1E7167008C3936 /* MainConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainConfigurator.swift; sourceTree = "<group>"; };
-		C2239C7B2A1E717A008C3936 /* ForecastRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastRouter.swift; sourceTree = "<group>"; };
 		C2239C7C2A1E717A008C3936 /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
 		C2239C7D2A1E717A008C3936 /* ForecastPresenterImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastPresenterImp.swift; sourceTree = "<group>"; };
 		C2239C7E2A1E717A008C3936 /* ForecastConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastConfigurator.swift; sourceTree = "<group>"; };
@@ -86,7 +82,6 @@
 		C23F7ECD2A1FA88100BFAE00 /* ExtLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtLabel.swift; sourceTree = "<group>"; };
 		C23F7ECF2A1FA8D700BFAE00 /* ExtButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtButton.swift; sourceTree = "<group>"; };
 		C23F7ED42A1FBC0D00BFAE00 /* ExtImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtImageView.swift; sourceTree = "<group>"; };
-		C23F7ED82A1FDBEE00BFAE00 /* SearchCityRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityRouter.swift; sourceTree = "<group>"; };
 		C23F7ED92A1FDBEE00BFAE00 /* SearchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
 		C23F7EDA2A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityPresenterImp.swift; sourceTree = "<group>"; };
 		C23F7EDB2A1FDBEE00BFAE00 /* SearchCityConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityConfigurator.swift; sourceTree = "<group>"; };
@@ -105,7 +100,6 @@
 		C247CA7A2A21E4CA00990E6C /* Weather+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weather+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C247CA7D2A21F24A00990E6C /* MainVC+AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+AlertController.swift"; sourceTree = "<group>"; };
 		C247CA802A220D0400990E6C /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		C247CA832A2211B900990E6C /* JustForButtonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustForButtonScene.swift; sourceTree = "<group>"; };
 		C2D424BF2A1E6C01009D3E0F /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2D424C22A1E6C01009D3E0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2D424C42A1E6C01009D3E0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,7 +205,6 @@
 				C23F7EEF2A208C7D00BFAE00 /* VCExtensions */,
 				C23F7EEE2A208BC300BFAE00 /* Cell */,
 				C23F7EE32A1FDBF500BFAE00 /* Protocols */,
-				C23F7ED82A1FDBEE00BFAE00 /* SearchCityRouter.swift */,
 				C23F7ED92A1FDBEE00BFAE00 /* SearchCityViewController.swift */,
 				C23F7EDA2A1FDBEE00BFAE00 /* SearchCityPresenterImp.swift */,
 				C23F7EDB2A1FDBEE00BFAE00 /* SearchCityConfigurator.swift */,
@@ -292,14 +285,6 @@
 				C247CA802A220D0400990E6C /* Strings.swift */,
 			);
 			path = Strings;
-			sourceTree = "<group>";
-		};
-		C247CA822A22119500990E6C /* JustForButtonScene */ = {
-			isa = PBXGroup;
-			children = (
-				C247CA832A2211B900990E6C /* JustForButtonScene.swift */,
-			);
-			path = JustForButtonScene;
 			sourceTree = "<group>";
 		};
 		C2D424B62A1E6C01009D3E0F = {
@@ -384,7 +369,6 @@
 				C2D424DF2A1E6FB2009D3E0F /* LaunchScreen */,
 				C2D424E22A1E7019009D3E0F /* RootTabBarController */,
 				C2D424E02A1E6FC4009D3E0F /* MainScene */,
-				C247CA822A22119500990E6C /* JustForButtonScene */,
 				C23F7ED62A1FDBD200BFAE00 /* SearchCityScene */,
 				C2D424E12A1E6FF8009D3E0F /* ForecastScene */,
 			);
@@ -418,7 +402,6 @@
 				C23F7EF12A208E1C00BFAE00 /* VCExtension */,
 				C23F7EF02A208E1800BFAE00 /* Cell */,
 				C2239C882A1E7199008C3936 /* Protocols */,
-				C2239C7B2A1E717A008C3936 /* ForecastRouter.swift */,
 				C2239C7C2A1E717A008C3936 /* ForecastViewController.swift */,
 				C2239C7D2A1E717A008C3936 /* ForecastPresenterImp.swift */,
 				C2239C7E2A1E717A008C3936 /* ForecastConfigurator.swift */,
@@ -508,8 +491,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C23F7EB62A1F3EC400BFAE00 /* RequestManager.swift in Sources */,
-				C23F7EDE2A1FDBEE00BFAE00 /* SearchCityRouter.swift in Sources */,
-				C247CA842A2211B900990E6C /* JustForButtonScene.swift in Sources */,
 				C2239C752A1E7167008C3936 /* MainRouter.swift in Sources */,
 				C2239C782A1E7167008C3936 /* MainConfigurator.swift in Sources */,
 				C23F7EF82A20B5EE00BFAE00 /* DescriptionTranslate.swift in Sources */,
@@ -538,7 +519,6 @@
 				C2239C822A1E717A008C3936 /* ForecastViewController.swift in Sources */,
 				C23F7EBA2A1F3EE000BFAE00 /* RequestSettings.swift in Sources */,
 				C2239C8F2A1E71B8008C3936 /* MainPresenter.swift in Sources */,
-				C2239C812A1E717A008C3936 /* ForecastRouter.swift in Sources */,
 				C23F7F212A2145E800BFAE00 /* DateFormatter.swift in Sources */,
 				C23F7EDF2A1FDBEE00BFAE00 /* SearchCityViewController.swift in Sources */,
 				C23F7EF52A2097C600BFAE00 /* ForecastVC+TableView.swift in Sources */,
