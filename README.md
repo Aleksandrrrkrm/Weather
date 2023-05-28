@@ -6,4 +6,6 @@
 
 -MVP(router)
 
+-Использовано API Яндекс погоды, и DaData - API подсказок по городам России
+
 ![Главный экран](https://github.com/Aleksandrrrkrm/Weather/assets/105147527/b519e38a-b076-45ab-a9bb-e54cc83f086a)
