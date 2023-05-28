@@ -18,6 +18,7 @@ class MainPresenterImp: NSObject, MainPresenter {
     
     // MARK: - Properties
     private var isFirstRequest = true
+    private var isFirstLocation = true
     private var lastAuthorizationStatusCL: CLAuthorizationStatus?
     private var lastLocation: CLLocation?
     
@@ -65,6 +66,11 @@ class MainPresenterImp: NSObject, MainPresenter {
             if let placemark = placemarks?.first {
                 if let city = placemark.locality {
                     self.view?.setupCityLabel("\(city)")
+                    if self.isFirstLocation {
+                        UserDefaults.standard.removeObject(forKey: "City")
+                        UserDefaults.standard.set(city, forKey: "City")
+                        self.isFirstLocation = false
+                    }
                 }
             }
         }
@@ -90,6 +96,7 @@ class MainPresenterImp: NSObject, MainPresenter {
             locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.startUpdatingLocation()
         } else {
+            getCityFromCache()
             getWeatherForecast(for: defaultLocation)
         }
     }
@@ -112,12 +119,13 @@ class MainPresenterImp: NSObject, MainPresenter {
     }
     
     private func getWeatherForecast(for location: CLLocation) {
+        lastLocation = location
         if InternetConnection.checkInternetConnection() {
-            lastLocation = location
             getWeather(lat: "\(location.coordinate.latitude)",
                        lon: "\(location.coordinate.longitude)")
             reverseGeocode(location: location)
         } else {
+            getCityFromCache()
             view?.showInternetAlert()
             sendNotification()
         }
@@ -135,6 +143,12 @@ class MainPresenterImp: NSObject, MainPresenter {
         let notificationName = Notification.Name("Forecast")
         let userInfo: [String: [Forecast]] = [NotificationName.userInfoKey.rawValue : data]
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
+    }
+    
+    private func getCityFromCache() {
+        if let city = UserDefaults.standard.string(forKey: "City") {
+            self.view?.setupCityLabel(city)
+        }
     }
     
     @objc func handleNotification(_ notification: Notification) {

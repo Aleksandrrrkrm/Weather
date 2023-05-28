@@ -30,6 +30,7 @@ extension MainViewController {
     }
     
     private func setupCityLabel() {
+        cityLabel.text = "-"
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(cityLabel)
         NSLayoutConstraint.activate([
