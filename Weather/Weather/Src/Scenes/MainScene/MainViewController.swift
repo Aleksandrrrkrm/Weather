@@ -6,59 +6,47 @@
 //
 
 import UIKit
-import CoreLocation
 
 class MainViewController: UIViewController {
     
     internal var presenter: MainPresenter?
     
     // MARK: - UI Elements
-    var searchButton = UIButton()
     var activityIndicator = UIActivityIndicatorView(style: .large)
     
     var cityLabel = UILabel()
         .alignment(.center)
         .setManyLines()
         .color(UIColor.white)
-        .font(UIFont(name: Strings.montserratBold.rawValue, size: 30) ?? UIFont())
+        .font(UIFont(name: Fonts.montserratBold.rawValue, size: 30) ?? UIFont())
     
     var tempLabel = UILabel()
         .color(UIColor.white)
-        .font(UIFont(name: Strings.montserratSemiBold.rawValue, size: 80) ?? UIFont())
+        .font(UIFont(name: Fonts.montserratSemiBold.rawValue, size: 80) ?? UIFont())
     
     var descriptionLabel = UILabel()
         .color(UIColor.white)
-        .font(UIFont(name: Strings.montserratMedium.rawValue, size: 20) ?? UIFont())
+        .font(UIFont(name: Fonts.montserratMedium.rawValue, size: 20) ?? UIFont())
     
     var imageView = UIImageView()
     
     // MARK: - Life cycle
+    override func loadView() {
+        super.loadView()
+        
+        MainConfigurator.configure(view: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MainConfigurator.configure(view: self)
         setupAllView()
+        showLoading()
     }
     
     // MARK: - USAGE
-    func getWeatherForecast(for location: CLLocation) {
-        presenter?.getWeather(lat: "\(location.coordinate.latitude)",
-                              lon: "\(location.coordinate.longitude)")
-        presenter?.reverseGeocode(location: location)
-    }
-    
     @objc func buttonTapped() {
         presenter?.openSearchScene()
-    }
-    
-    private func performInMainThread(_ block: @escaping () -> ()) {
-        if Thread.isMainThread {
-            block()
-        } else {
-            DispatchQueue.main.async {
-                block()
-            }
-        }
     }
 }
 
@@ -108,15 +96,25 @@ extension MainViewController: MainView {
     func showInternetAlert() {
         hideLoading()
         performInMainThread {
-            CustomAlertController.showAlert(withTitle: Strings.weatherInfoNotAvailable.rawValue,
-                                            message: Strings.checkInternetConnection.rawValue,
-                                            viewController: self) {
+            self.showAlert(withTitle: Strings.weatherInfoNotAvailable.rawValue,
+                           message: Strings.checkInternetConnection.rawValue,
+                           actionTitle: Strings.settings.rawValue,
+                           viewController: self) {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     if UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
                 }
             }
+        }
+    }
+    
+    func showErrorAlert(message: String) {
+        performInMainThread {
+            self.showAlert(withTitle: Strings.errorTitle.rawValue,
+                           message: message,
+                           actionTitle: nil,
+                           viewController: self)
         }
     }
 }

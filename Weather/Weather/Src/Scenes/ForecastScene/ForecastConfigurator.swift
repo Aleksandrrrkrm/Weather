@@ -12,7 +12,7 @@ enum ForecastConfigurator {
     static func configure(view: ForecastViewController) {
         let presenter = ForecastPresenterImp(view)
         view.presenter = presenter
-        let notificationName = Notification.Name("Forecast")
+        let notificationName = Notification.Name(NotificationName.forecast.rawValue)
         NotificationCenter.default.addObserver(presenter, selector: #selector(presenter.handleNotification(_:)), name: notificationName, object: nil)
     }
     

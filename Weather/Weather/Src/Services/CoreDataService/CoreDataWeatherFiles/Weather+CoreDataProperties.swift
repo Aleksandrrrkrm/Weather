@@ -13,7 +13,7 @@ import CoreData
 extension Weather {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Weather> {
-        return NSFetchRequest<Weather>(entityName: "Weather")
+        return NSFetchRequest<Weather>(entityName: CoreDataEntity.name.rawValue)
     }
 
     @NSManaged public var date: String?

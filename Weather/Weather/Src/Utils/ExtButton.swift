@@ -33,8 +33,8 @@ extension UIButton {
     }
     
     @discardableResult
-    func font(_ font: UIFont, size: CGFloat? = nil) -> Self {
-        self.titleLabel?.font = size != nil ? font.withSize(size!) : font
+    func font(_ font: UIFont, size: CGFloat) -> Self {
+        self.titleLabel?.font = font.withSize(size)
         return self
     }
     

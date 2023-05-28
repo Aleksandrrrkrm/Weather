@@ -10,8 +10,10 @@ import UIKit
 class SearchResultTableViewCell: UITableViewCell {
     
     private var label = UILabel()
-        .font(UIFont(name: "Montserrat-SemiBold", size: 18) ?? UIFont())
+        .setManyLines()
         .color(.white)
+        .font(UIFont(name: Fonts.montserratSemiBold.rawValue, size: 18) ?? UIFont())
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,22 +26,21 @@ class SearchResultTableViewCell: UITableViewCell {
         setupLabel()
     }
     
-    // MARK: - Settings
-    
+    // MARK: - Configure UI
     private func configureCell() {
         selectionStyle = .none
-        backgroundColor = UIColor(named: "appBlue")
+        backgroundColor = UIColor(named: Colors.appBlue.rawValue)
     }
     
     private func setupLabel() {
         contentView.addSubview(label)
-        label.backgroundColor = UIColor(named: "appBlue")
+        label.backgroundColor = UIColor(named: Colors.appBlue.rawValue)
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            label.heightAnchor.constraint(equalToConstant: CGFloat(50))
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
     

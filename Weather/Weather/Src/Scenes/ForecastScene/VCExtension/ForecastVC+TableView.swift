@@ -14,7 +14,7 @@ extension ForecastViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ForecastTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellsId.forecastCell.rawValue, for: indexPath) as? ForecastTableViewCell else {
             return UITableViewCell()
         }
         guard let data = presenter?.getData() else {

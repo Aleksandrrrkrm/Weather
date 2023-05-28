@@ -9,7 +9,7 @@ import CoreData
 
 final class CoreStack {
     
-    static var shared = CoredataStack(modelName: "Weather")
+    static var shared = CoredataStack(modelName: CoreDataEntity.name.rawValue)
     
     fileprivate init () {}
 }

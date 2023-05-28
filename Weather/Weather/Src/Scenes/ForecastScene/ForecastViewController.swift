@@ -9,8 +9,10 @@ import UIKit
 
 class ForecastViewController: UIViewController {
     
+    
     internal var presenter: ForecastPresenter?
     
+    // MARK: - UI elements
     var tableView = UITableView()
     var activityIndicator = UIActivityIndicatorView(style: .large)
     
@@ -24,57 +26,27 @@ class ForecastViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator.color = .white
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: "cell")
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Недельный прогноз"
-        
-        view.backgroundColor = UIColor(named: "appBlue")
-        setupTableView()
+        setupAllViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         showLoading()
-//        tableView.reloadData()
     }
-    
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.backgroundColor = UIColor(named: "appBlue")
-        tableView.backgroundView = activityIndicator
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-            
-        ])
-    }
-    
+
+    // MARK: - Methods
     func showLoading() {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
-    
-    private func performInMainThread(_ block: @escaping () -> ()) {
-        if Thread.isMainThread {
-            block()
-        } else {
-            DispatchQueue.main.async {
-                block()
-            }
-        }
-    }
 }
 
+    // MARK: Protocol extension
 extension ForecastViewController: ForecastView {
     
     func reloadTableView() {

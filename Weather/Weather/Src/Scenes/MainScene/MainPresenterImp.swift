@@ -34,39 +34,20 @@ class MainPresenterImp: NSObject, MainPresenter {
     }
     
     // MARK: - API method
-    func getWeather(lat: String, lon: String) {
-        RequestManager.request(requestType: .getWeather(lat: lat, lon: lon)) { [weak self] result in
+    private func getWeather(lat: String, lon: String) {
+        RequestManager.request(requestType: .getWeather(lat: lat, lon: lon)) { [weak self] (result: Result<WeatherForecast, Error>) in
             switch result {
             case let .success(data):
-                do {
-                    let decoder = JSONDecoder()
-                    let forecast = try decoder.decode(WeatherForecast.self, from: data)
-                    
-                    let currentTemperature = forecast.fact.temp
-                    let currentCondition = forecast.fact.condition
-                    
-                    self?.view?.setupTempLabel(currentTemperature)
-                    self?.setDescription(key: currentCondition)
-                    
-                    self?.saveData(forecast.forecasts)
-                    
-                    let notificationName = Notification.Name("Forecast")
-                    let userInfo: [String: [Forecast]] = ["weather" : forecast.forecasts]
-                    NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
-                    self?.view?.hideLoading()
-                } catch {
-#if DEBUG
-                    print("ошибка getWeather: \(error)")
-#endif
-                }
-            case .failure:
-                self?.view?.showInternetAlert()
-                let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-                guard let cashe = self?.coreDataGateway.getData(sortDescriptors: [sortDescriptor]) else { return }
-                let notificationName = Notification.Name("Forecast")
-                let userInfo: [String: [Forecast]] = ["weather" : cashe]
-                NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
+                let currentTemperature = data.fact.temp
+                let currentCondition = data.fact.condition
                 
+                self?.view?.setupTempLabel(currentTemperature)
+                self?.setDescription(key: currentCondition)
+                self?.saveData(data.forecasts)
+                self?.sendNotification(with: data.forecasts)
+                self?.view?.hideLoading()
+            case let .failure(error):
+                self?.view?.showErrorAlert(message: error.localizedDescription)
             }
         }
     }
@@ -130,14 +111,36 @@ class MainPresenterImp: NSObject, MainPresenter {
         view?.setupImage(imageName)
     }
     
-    func openSearchScene() {
-        router.openSearchScene()
+    private func getWeatherForecast(for location: CLLocation) {
+        if InternetConnection.checkInternetConnection() {
+            lastLocation = location
+            getWeather(lat: "\(location.coordinate.latitude)",
+                       lon: "\(location.coordinate.longitude)")
+            reverseGeocode(location: location)
+        } else {
+            view?.showInternetAlert()
+            sendNotification()
+        }
+    }
+    
+    private func sendNotification(with data: [Forecast]? = nil) {
+        guard let data else {
+            let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+            guard let data = self.coreDataGateway.getData(sortDescriptors: [sortDescriptor]) else { return }
+            let notificationName = Notification.Name("Forecast")
+            let userInfo: [String: [Forecast]] = [NotificationName.userInfoKey.rawValue : data]
+            NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
+            return
+        }
+        let notificationName = Notification.Name("Forecast")
+        let userInfo: [String: [Forecast]] = [NotificationName.userInfoKey.rawValue : data]
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
     }
     
     @objc func handleNotification(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             if let value = userInfo["NewCity"] as? AddressSuggestion {
-
+                
                 guard let lat = value.data.geoLat,
                       let lon = value.data.geoLon else { return }
                 
@@ -153,11 +156,8 @@ class MainPresenterImp: NSObject, MainPresenter {
         }
     }
     
-    func getWeatherForecast(for location: CLLocation) {
-        lastLocation = location
-        getWeather(lat: "\(location.coordinate.latitude)",
-                              lon: "\(location.coordinate.longitude)")
-        reverseGeocode(location: location)
+    func openSearchScene() {
+        router.openSearchScene()
     }
 }
 
@@ -174,7 +174,7 @@ extension MainPresenterImp: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 #if DEBUG
-                    print("ошибка locationManager: \(error)")
+        print("ошибка locationManager: \(error)")
 #endif
     }
     

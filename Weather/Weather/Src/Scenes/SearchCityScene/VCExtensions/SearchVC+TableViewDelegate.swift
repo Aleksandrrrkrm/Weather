@@ -10,11 +10,11 @@ import UIKit
 extension SearchCityViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.getCount() ?? 0
+        return presenter?.getData().count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as? SearchResultTableViewCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellsId.searchCell.rawValue, for: indexPath) as? SearchResultTableViewCell,
               let data = presenter?.getData() else {
             return UITableViewCell()
         }
@@ -28,9 +28,7 @@ extension SearchCityViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let data = presenter?.getData() else { return }
-        let notificationName = Notification.Name("NewCity")
-        let userInfo: [String: AddressSuggestion] = ["NewCity" : data[indexPath.row]]
-        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
+        presenter?.sendNotification(with: data[indexPath.row])
         closeScene()
     }
 }

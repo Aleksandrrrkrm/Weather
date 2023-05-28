@@ -3,18 +3,15 @@
 //  Weather
 //
 //  Created by Александр Головин on 25.05.2023.
-//  Copyright (c) 2023 ___ORGANIZATIONNAME___. All rights reserved.
-//
-//  Cheeezcake Template Inc.
 //
 
-import UIKit
-
-protocol SearchCityView: AnyObject {
+protocol SearchCityView: BaseView {
     
     func reloadTableView()
     
     func hideLoading()
     
     func showInternetAlert()
+    
+    func showErrorAlert(message: String)
 }

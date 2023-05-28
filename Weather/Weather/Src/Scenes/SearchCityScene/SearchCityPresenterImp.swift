@@ -13,8 +13,9 @@ class SearchCityPresenterImp: SearchCityPresenter {
     private weak var view: SearchCityView?
     
     // MARK: - Properties
-    private var resultCount = 0
     private var data: [AddressSuggestion] = []
+    
+    var searchTimer: Timer?
     
     // MARK: - Init
     init(_ view: SearchCityView) {
@@ -23,31 +24,31 @@ class SearchCityPresenterImp: SearchCityPresenter {
     
     // MARK: - API method
     func getGeo(query: String) {
-        RequestManager.request(requestType: .getGeo(query: query)) { [weak self] result in
+        RequestManager.request(requestType: .getGeo(query: query)) { [weak self] (result: Result<AddressSuggestionsResponse, Error>) in
             switch result {
             case let .success(data):
-                do {
-                    let decoder = JSONDecoder()
-                    let suggestionsResponse = try decoder.decode(AddressSuggestionsResponse.self, from: data)
-                    self?.resultCount = suggestionsResponse.suggestions.count
-                    self?.reloadData()
-                    suggestionsResponse.suggestions.forEach { item in
-                        if item.data.geoLat != nil {
-                            self?.data.append(item)
-                        }
+                self?.reloadData()
+                data.suggestions.forEach { item in
+                    if item.data.geoLat != nil {
+                        self?.data.append(item)
                     }
-                    self?.data = suggestionsResponse.suggestions
-                    self?.view?.hideLoading()
-                    self?.view?.reloadTableView()
-                } catch {
-#if DEBUG
-                    print("ошибка getGeo JSON: \(error)")
-#endif
                 }
-            case .failure:
-                self?.view?.showInternetAlert()
+                self?.data = data.suggestions
+                self?.view?.hideLoading()
+                self?.view?.reloadTableView()
+            case let .failure(error):
+                self?.view?.showErrorAlert(message: error.localizedDescription)
             }
         }
+    }
+    
+    func searchCity(text: String) {
+        searchTimer?.invalidate()
+        searchTimer = Timer.scheduledTimer(timeInterval: 0.3,
+                                           target: self,
+                                           selector: #selector(search),
+                                           userInfo: text,
+                                           repeats: false)
     }
     
     // MARK: - Helpers
@@ -55,8 +56,20 @@ class SearchCityPresenterImp: SearchCityPresenter {
         data = []
     }
     
-    func getCount() -> Int {
-        resultCount
+    @objc func search(timer: Timer) {
+        if InternetConnection.checkInternetConnection() {
+            if let searchText = timer.userInfo as? String {
+                self.getGeo(query: searchText)
+            }
+        } else {
+            view?.showInternetAlert()
+        }
+    }
+    
+    func sendNotification(with data: AddressSuggestion) {
+        let notificationName = Notification.Name(NotificationName.newCity.rawValue)
+        let userInfo: [String: AddressSuggestion] = [NotificationName.newCity.rawValue : data]
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
     }
     
     func getData() -> [AddressSuggestion] {

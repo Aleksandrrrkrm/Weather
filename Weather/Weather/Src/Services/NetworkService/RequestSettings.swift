@@ -26,7 +26,8 @@ struct RequestSettings {
                 request.httpMethod = "POST"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 request.setValue("application/json", forHTTPHeaderField: "Accept")
-                request.setValue("Token b0b15ae1e9349d2aeafcb28a3d491e1501a20408", forHTTPHeaderField: "Authorization")
+                request.setValue("Token b0b15ae1e9349d2aeafcb28a3d491e1501a20408",
+                                 forHTTPHeaderField: "Authorization")
                 let parameters = [
                     "query": query,
                     "count": 5,
@@ -35,7 +36,7 @@ struct RequestSettings {
                 ] as [String : Any]
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {
 #if DEBUG
-                    print("ошибка setupRequest")
+                    print("ошибка setupRequest getGeo")
 #endif
                     return nil
                 }
@@ -57,12 +58,13 @@ struct RequestSettings {
             urlComponents?.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
             guard let url = urlComponents?.url else {
 #if DEBUG
-                print("ошибка setupRequest")
+                print("ошибка setupRequest getWeather")
 #endif
                 return nil
             }
             request = URLRequest(url: url)
-            request.setValue("e11fbff5-fff6-4ac2-a100-00aa99d02d68", forHTTPHeaderField: "X-Yandex-API-Key")
+            request.setValue("e11fbff5-fff6-4ac2-a100-00aa99d02d68",
+                             forHTTPHeaderField: "X-Yandex-API-Key")
             request.httpMethod = "GET"
             return request
             

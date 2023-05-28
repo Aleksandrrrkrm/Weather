@@ -11,15 +11,15 @@ class ForecastTableViewCell: UITableViewCell {
     
     var dateLabel = UILabel()
         .color(UIColor.white)
-        .font(UIFont(name: "Montserrat-SemiBold", size: 14) ?? UIFont())
+        .font(UIFont(name: Fonts.montserratSemiBold.rawValue, size: 14) ?? UIFont())
     var descriptionLabel = UILabel()
         .alignment(.right)
         .setManyLines()
         .color(UIColor.white)
-        .font(UIFont(name: "Montserrat-Bold", size: 19) ?? UIFont())
+        .font(UIFont(name: Fonts.montserratBold.rawValue, size: 19) ?? UIFont())
     var maxLabel = UILabel()
         .color(UIColor.white)
-        .font(UIFont(name: "Montserrat-Bold", size: 20) ?? UIFont())
+        .font(UIFont(name: Fonts.montserratBold.rawValue, size: 19) ?? UIFont())
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,13 +30,14 @@ class ForecastTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         selectionStyle = .none
-        backgroundColor = UIColor(named: "appBlue")
-        contentView.backgroundColor = UIColor(named: "appBlue")
+        backgroundColor = UIColor(named: Colors.appBlue.rawValue)
+        contentView.backgroundColor = UIColor(named: Colors.appBlue.rawValue)
         setupViews()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5,
                                                                      left: 10,
                                                                      bottom: 5,

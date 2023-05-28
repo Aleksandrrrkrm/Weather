@@ -27,7 +27,7 @@ class ForecastPresenterImp: ForecastPresenter {
     
     @objc func handleNotification(_ notification: Notification) {
         if let userInfo = notification.userInfo {
-            if let value = userInfo["weather"] as? [Forecast] {
+            if let value = userInfo[NotificationName.userInfoKey.rawValue] as? [Forecast] {
                 setData(data: value)
                 view?.reloadTableView()
                 view?.hideLoading()

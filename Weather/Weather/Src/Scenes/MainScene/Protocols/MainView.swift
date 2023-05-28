@@ -7,19 +7,21 @@
 
 import UIKit
 
-protocol MainView: AnyObject {
+protocol MainView: BaseView {
+    
+    func setupDescriptionLabel(_ text: String)
     
     func setupCityLabel(_ text: String)
     
     func setupTempLabel(_ temp: Int)
     
-    func setupDescriptionLabel(_ text: String)
-    
     func setupImage(_ named: String)
+    
+    func showInternetAlert()
+    
+    func showErrorAlert(message: String)
     
     func showLoading()
     
     func hideLoading()
-    
-    func showInternetAlert()
 }
